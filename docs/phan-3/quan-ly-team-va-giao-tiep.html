@@ -1,0 +1,358 @@
+<!DOCTYPE HTML>
+<html lang="vi" class="light sidebar-visible" dir="ltr">
+    <head>
+        <!-- Book generated using mdBook -->
+        <meta charset="UTF-8">
+        <title>Quản lý Team và vấn đề giao tiếp - Một cuốn sách về quản lý dự án phần mềm</title>
+
+
+        <!-- Custom HTML head -->
+
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="theme-color" content="#ffffff">
+
+        <link rel="icon" href="../favicon.svg">
+        <link rel="shortcut icon" href="../favicon.png">
+        <link rel="stylesheet" href="../css/variables.css">
+        <link rel="stylesheet" href="../css/general.css">
+        <link rel="stylesheet" href="../css/chrome.css">
+        <link rel="stylesheet" href="../css/print.css" media="print">
+
+        <!-- Fonts -->
+        <link rel="stylesheet" href="../FontAwesome/css/font-awesome.css">
+        <link rel="stylesheet" href="../fonts/fonts.css">
+
+        <!-- Highlight.js Stylesheets -->
+        <link rel="stylesheet" href="../highlight.css">
+        <link rel="stylesheet" href="../tomorrow-night.css">
+        <link rel="stylesheet" href="../ayu-highlight.css">
+
+        <!-- Custom theme stylesheets -->
+
+
+        <!-- Provide site root to javascript -->
+        <script>
+            var path_to_root = "../";
+            var default_theme = window.matchMedia("(prefers-color-scheme: dark)").matches ? "navy" : "light";
+        </script>
+        <!-- Start loading toc.js asap -->
+        <script src="../toc.js"></script>
+    </head>
+    <body>
+    <div id="body-container">
+        <!-- Work around some values being stored in localStorage wrapped in quotes -->
+        <script>
+            try {
+                var theme = localStorage.getItem('mdbook-theme');
+                var sidebar = localStorage.getItem('mdbook-sidebar');
+
+                if (theme.startsWith('"') && theme.endsWith('"')) {
+                    localStorage.setItem('mdbook-theme', theme.slice(1, theme.length - 1));
+                }
+
+                if (sidebar.startsWith('"') && sidebar.endsWith('"')) {
+                    localStorage.setItem('mdbook-sidebar', sidebar.slice(1, sidebar.length - 1));
+                }
+            } catch (e) { }
+        </script>
+
+        <!-- Set the theme before any content is loaded, prevents flash -->
+        <script>
+            var theme;
+            try { theme = localStorage.getItem('mdbook-theme'); } catch(e) { }
+            if (theme === null || theme === undefined) { theme = default_theme; }
+            const html = document.documentElement;
+            html.classList.remove('light')
+            html.classList.add(theme);
+            html.classList.add("js");
+        </script>
+
+        <input type="checkbox" id="sidebar-toggle-anchor" class="hidden">
+
+        <!-- Hide / unhide sidebar before it is displayed -->
+        <script>
+            var sidebar = null;
+            var sidebar_toggle = document.getElementById("sidebar-toggle-anchor");
+            if (document.body.clientWidth >= 1080) {
+                try { sidebar = localStorage.getItem('mdbook-sidebar'); } catch(e) { }
+                sidebar = sidebar || 'visible';
+            } else {
+                sidebar = 'hidden';
+            }
+            sidebar_toggle.checked = sidebar === 'visible';
+            html.classList.remove('sidebar-visible');
+            html.classList.add("sidebar-" + sidebar);
+        </script>
+
+        <nav id="sidebar" class="sidebar" aria-label="Table of contents">
+            <!-- populated by js -->
+            <mdbook-sidebar-scrollbox class="sidebar-scrollbox"></mdbook-sidebar-scrollbox>
+            <noscript>
+                <iframe class="sidebar-iframe-outer" src="../toc.html"></iframe>
+            </noscript>
+            <div id="sidebar-resize-handle" class="sidebar-resize-handle">
+                <div class="sidebar-resize-indicator"></div>
+            </div>
+        </nav>
+
+        <div id="page-wrapper" class="page-wrapper">
+
+            <div class="page">
+                <div id="menu-bar-hover-placeholder"></div>
+                <div id="menu-bar" class="menu-bar sticky">
+                    <div class="left-buttons">
+                        <label id="sidebar-toggle" class="icon-button" for="sidebar-toggle-anchor" title="Toggle Table of Contents" aria-label="Toggle Table of Contents" aria-controls="sidebar">
+                            <i class="fa fa-bars"></i>
+                        </label>
+                        <button id="theme-toggle" class="icon-button" type="button" title="Change theme" aria-label="Change theme" aria-haspopup="true" aria-expanded="false" aria-controls="theme-list">
+                            <i class="fa fa-paint-brush"></i>
+                        </button>
+                        <ul id="theme-list" class="theme-popup" aria-label="Themes" role="menu">
+                            <li role="none"><button role="menuitem" class="theme" id="light">Light</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="rust">Rust</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="coal">Coal</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="navy">Navy</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="ayu">Ayu</button></li>
+                        </ul>
+                        <button id="search-toggle" class="icon-button" type="button" title="Search. (Shortkey: s)" aria-label="Toggle Searchbar" aria-expanded="false" aria-keyshortcuts="S" aria-controls="searchbar">
+                            <i class="fa fa-search"></i>
+                        </button>
+                    </div>
+
+                    <h1 class="menu-title">Một cuốn sách về quản lý dự án phần mềm</h1>
+
+                    <div class="right-buttons">
+                        <a href="../print.html" title="Print this book" aria-label="Print this book">
+                            <i id="print-button" class="fa fa-print"></i>
+                        </a>
+
+                    </div>
+                </div>
+
+                <div id="search-wrapper" class="hidden">
+                    <form id="searchbar-outer" class="searchbar-outer">
+                        <input type="search" id="searchbar" name="searchbar" placeholder="Search this book ..." aria-controls="searchresults-outer" aria-describedby="searchresults-header">
+                    </form>
+                    <div id="searchresults-outer" class="searchresults-outer hidden">
+                        <div id="searchresults-header" class="searchresults-header"></div>
+                        <ul id="searchresults">
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Apply ARIA attributes after the sidebar and the sidebar toggle button are added to the DOM -->
+                <script>
+                    document.getElementById('sidebar-toggle').setAttribute('aria-expanded', sidebar === 'visible');
+                    document.getElementById('sidebar').setAttribute('aria-hidden', sidebar !== 'visible');
+                    Array.from(document.querySelectorAll('#sidebar a')).forEach(function(link) {
+                        link.setAttribute('tabIndex', sidebar === 'visible' ? 0 : -1);
+                    });
+                </script>
+
+                <div id="content" class="content">
+                    <main>
+                        <h1 id="chapter-6--managing-teams-and-communication"><a class="header" href="#chapter-6--managing-teams-and-communication"><strong>CHAPTER 6 – Managing Teams and Communication</strong></a></h1>
+<p>Dự án phần mềm không phải là một chiếc máy; nó là một nhóm người cố gắng làm việc cùng nhau để tạo ra một chiếc máy. Mỗi người đến với dự án từ những hoàn cảnh khác nhau, mang theo kinh nghiệm, thói quen, kỳ vọng và cả điểm yếu riêng. Đó là lý do quản lý đội nhóm không chỉ là “phân việc” mà là nghệ thuật dẫn dắt con người.</p>
+<p>Chương này giúp bạn hiểu cách một nhóm phát triển qua thời gian, cách bạn có thể xác định vai trò dựa trên điểm mạnh, và quan trọng hơn — cách giao tiếp hiệu quả trong môi trường kỹ thuật.</p>
+<h2 id="1-team-development-hành-trình-từ-xa-lạ-đến-phối-hợp"><a class="header" href="#1-team-development-hành-trình-từ-xa-lạ-đến-phối-hợp"><strong>1. Team Development: Hành trình từ xa lạ đến phối hợp</strong></a></h2>
+<p>Bruce Tuckman mô tả nhóm phát triển qua bốn giai đoạn: <strong>Forming → Storming → Norming → Performing</strong>.
+Không có nhóm nào nhảy thẳng vào performing cả — dù bạn có tuyển toàn thiên tài.</p>
+<h3 id="forming--giai-đoạn-làm-quen"><a class="header" href="#forming--giai-đoạn-làm-quen"><strong>Forming – Giai đoạn làm quen</strong></a></h3>
+<p>Nhóm mới gặp nhau.
+Mọi người lịch sự, hơi dè chừng, cố gắng tỏ ra “ổn”.</p>
+<p><strong>Dấu hiệu:</strong></p>
+<ul>
+<li>ai cũng nói: “Để mình xem thử…”,</li>
+<li>chưa ai muốn tranh luận mạnh,</li>
+<li>ai cũng chờ người khác chủ động.</li>
+</ul>
+<p><strong>Vai trò của PM hoặc người dẫn dắt:</strong></p>
+<ul>
+<li>giới thiệu mục tiêu rõ ràng,</li>
+<li>làm cho mọi người thấy an toàn khi đặt câu hỏi,</li>
+<li>phân việc nhẹ nhàng để nhóm khởi động.</li>
+</ul>
+<h3 id="storming--giai-đoạn-mâu-thuẫn-bùng-lên"><a class="header" href="#storming--giai-đoạn-mâu-thuẫn-bùng-lên"><strong>Storming – Giai đoạn mâu thuẫn bùng lên</strong></a></h3>
+<p>Đây là giai đoạn thật sự “gập ghềnh”:
+con người khác biệt → va chạm xảy ra → xung đột xuất hiện.</p>
+<p><strong>Dấu hiệu:</strong></p>
+<ul>
+<li>bất đồng ý kiến về cách làm,</li>
+<li>căng thẳng khi ai đó không hoàn thành phần việc,</li>
+<li>có xu hướng đổ lỗi hoặc phòng thủ.</li>
+</ul>
+<p><strong>Vai trò của PM:</strong></p>
+<ul>
+<li>làm rõ kỳ vọng,</li>
+<li>khuyến khích thảo luận nhưng giữ tôn trọng,</li>
+<li>xử lý xung đột sớm thay vì để nó âm ỉ.</li>
+</ul>
+<p>Giai đoạn này không xấu — nó là điều kiện để nhóm thật sự hiểu nhau.</p>
+<h3 id="norming--giai-đoạn-ổn-định"><a class="header" href="#norming--giai-đoạn-ổn-định"><strong>Norming – Giai đoạn ổn định</strong></a></h3>
+<p>Mọi người bắt đầu hiểu nhau, tôn trọng nhau hơn và hình thành chuẩn mực.</p>
+<p><strong>Dấu hiệu:</strong></p>
+<ul>
+<li>vai trò rõ ràng,</li>
+<li>mọi người chủ động hỗ trợ nhau,</li>
+<li>xung đột giảm mạnh.</li>
+</ul>
+<p><strong>Vai trò của PM:</strong></p>
+<ul>
+<li>củng cố quy tắc làm việc,</li>
+<li>tạo cơ hội cho mọi người thảo luận giải pháp,</li>
+<li>giảm giám sát, tăng trao quyền.</li>
+</ul>
+<h3 id="performing--giai-đoạn-nhóm-mơ-ước"><a class="header" href="#performing--giai-đoạn-nhóm-mơ-ước"><strong>Performing – Giai đoạn “nhóm mơ ước”</strong></a></h3>
+<p>Đây là lúc nhóm hoạt động như một cỗ máy mượt mà.
+Năng suất cao, tự quản tốt, tin tưởng lẫn nhau.</p>
+<p><strong>Dấu hiệu:</strong></p>
+<ul>
+<li>thảo luận tập trung vào giải pháp,</li>
+<li>thành viên chủ động đề xuất cải tiến,</li>
+<li>chất lượng và tốc độ đều tốt.</li>
+</ul>
+<p><strong>Vai trò của PM:</strong></p>
+<ul>
+<li>loại bỏ chướng ngại thay vì điều khiển,</li>
+<li>duy trì động lực và ghi nhận đóng góp,</li>
+<li>đảm bảo nhóm không bị quá tải.</li>
+</ul>
+<h2 id="2-swot-analysis-tìm-vai-trò-dựa-trên-điểm-mạnh"><a class="header" href="#2-swot-analysis-tìm-vai-trò-dựa-trên-điểm-mạnh"><strong>2. SWOT Analysis: Tìm vai trò dựa trên điểm mạnh</strong></a></h2>
+<p>SWOT (Strengths – Weaknesses – Opportunities – Threats) thường dành cho doanh nghiệp, nhưng dùng cho cá nhân trong nhóm lại cực kỳ hiệu quả.</p>
+<p>Nó giúp bạn trả lời ba câu hỏi quan trọng:</p>
+<ol>
+<li>Tôi mạnh ở đâu?</li>
+<li>Tôi yếu ở đâu?</li>
+<li>Tôi phù hợp với vai trò nào nhất trong nhóm?</li>
+</ol>
+<h3 id="làm-swot-để-phân-vai"><a class="header" href="#làm-swot-để-phân-vai"><strong>Làm SWOT để phân vai</strong></a></h3>
+<p>Bạn muốn tìm vai trò tự nhiên cho từng người:</p>
+<ul>
+<li>Ai giỏi tổ chức? → giao nhiệm vụ điều phối.</li>
+<li>Ai có tư duy chi tiết? → giao nhiệm vụ kiểm thử.</li>
+<li>Ai giao tiếp tốt? → làm cầu nối giữa nhóm và khách hàng.</li>
+<li>Ai giỏi chuyên sâu kỹ thuật? → đảm nhận module cốt lõi.</li>
+</ul>
+<h3 id="ví-dụ-swot-của-một-thành-viên-kỹ-thuật"><a class="header" href="#ví-dụ-swot-của-một-thành-viên-kỹ-thuật"><strong>Ví dụ SWOT của một thành viên kỹ thuật</strong></a></h3>
+<p><strong>Strengths:</strong> logic tốt, thích tối ưu code.
+<strong>Weaknesses:</strong> ngại giao tiếp, đôi khi làm việc cá nhân quá mức.
+<strong>Opportunities:</strong> học thêm về performance tuning.
+<strong>Threats:</strong> deadline gấp khiến người này dễ “tự cô lập”.</p>
+<p><strong>Vai trò phù hợp:</strong> phụ trách backend chính + cần một người phối hợp giao tiếp với khách hàng thay.</p>
+<p>SWOT không phải nhãn dán. Nó là công cụ để hiểu nhau hơn, để phân việc hợp lý và tránh “đặt người sai chỗ”.</p>
+<h2 id="3-communication-and-motivation-sức-mạnh-của-trao-đổi-và-tinh-thần"><a class="header" href="#3-communication-and-motivation-sức-mạnh-của-trao-đổi-và-tinh-thần"><strong>3. Communication and Motivation: Sức mạnh của trao đổi và tinh thần</strong></a></h2>
+<p>Một nhóm kỹ thuật không hoạt động chỉ bằng code. Họ hoạt động bằng giao tiếp.
+Và giao tiếp trong kỹ thuật có đặc thù riêng: rõ ràng, logic, và tôn trọng thời gian của nhau.</p>
+<p>Dưới đây là những kỹ thuật hữu ích nhất khi bạn làm việc với các nhóm lập trình viên, tester hoặc chuyên gia kỹ thuật.</p>
+<h3 id="1-stand-up-meeting-gặp-ngắn-nhưng-đủ-ý"><a class="header" href="#1-stand-up-meeting-gặp-ngắn-nhưng-đủ-ý"><strong>(1) Stand-up meeting: Gặp ngắn nhưng đủ ý</strong></a></h3>
+<p>Một buổi họp 10–15 phút mỗi ngày, mỗi người chỉ trả lời ba điều:</p>
+<ul>
+<li>Hôm qua làm gì?</li>
+<li>Hôm nay sẽ làm gì?</li>
+<li>Có đang bị kẹt không?</li>
+</ul>
+<p>Stand-up không phải để báo cáo “cho đẹp”, mà để phát hiện vấn đề sớm.</p>
+<h3 id="2-communication-by-visibility-hiển-thị-trạng-thái-công-việc"><a class="header" href="#2-communication-by-visibility-hiển-thị-trạng-thái-công-việc"><strong>(2) Communication by visibility: Hiển thị trạng thái công việc</strong></a></h3>
+<p>Kỹ thuật này dựa trên nguyên tắc đơn giản:
+<em>trạng thái được nhìn thấy → công việc dễ phối hợp hơn.</em></p>
+<p>Cách làm:</p>
+<ul>
+<li>bảng Kanban,</li>
+<li>Gantt chart,</li>
+<li>ticket của Jira/Trello/Notion.</li>
+</ul>
+<p>Nhìn vào bảng, bạn biết ai đang quá tải, ai đang chờ review, ai bị kẹt — không cần suy đoán.</p>
+<h3 id="3-active-listening-lắng-nghe-đúng-cách"><a class="header" href="#3-active-listening-lắng-nghe-đúng-cách"><strong>(3) Active listening: Lắng nghe đúng cách</strong></a></h3>
+<p>Trong môi trường kỹ thuật, đôi khi vấn đề không phải ở code mà ở hiểu lầm.</p>
+<p>Active listening nghĩa là:</p>
+<ul>
+<li>không cắt ngang,</li>
+<li>hỏi lại để chắc chắn,</li>
+<li>tóm tắt những gì nghe được.</li>
+</ul>
+<p>Một câu “Để mình hiểu lại xem nhé…” giúp tránh hàng giờ tranh cãi.</p>
+<h3 id="4-motivation-không-chỉ-là-thưởng--phạt"><a class="header" href="#4-motivation-không-chỉ-là-thưởng--phạt"><strong>(4) Motivation: Không chỉ là thưởng – phạt</strong></a></h3>
+<p>Người kỹ thuật có động lực rất khác với nhân viên bán hàng hay marketing.</p>
+<p>Họ bị thúc đẩy bởi:</p>
+<ul>
+<li>được giao thử thách đúng mức,</li>
+<li>được thừa nhận,</li>
+<li>được làm việc với người giỏi,</li>
+<li>được học cái mới.</li>
+</ul>
+<p>Động lực không phải chuyện cảm xúc; nó là chuyện môi trường.
+Bạn tạo môi trường tốt → nhóm tự động mạnh lên.</p>
+<h3 id="5-phản-hồi-đúng-cách-feedback-loops"><a class="header" href="#5-phản-hồi-đúng-cách-feedback-loops"><strong>(5) Phản hồi đúng cách (Feedback loops)</strong></a></h3>
+<p>Phản hồi có hai loại:</p>
+<ul>
+<li><strong>Phản hồi công việc</strong>: “Phần này cần sửa vì ảnh hưởng X.”</li>
+<li><strong>Phản hồi hành vi</strong>: “Khi bạn trả lời ngắn quá, mọi người khó hiểu.”</li>
+</ul>
+<p>Một phản hồi hiệu quả có ba tính chất:</p>
+<ol>
+<li>Cụ thể.</li>
+<li>Tập trung vào hành động, không công kích cá nhân.</li>
+<li>Đưa ra càng sớm càng tốt.</li>
+</ol>
+<p>Phản hồi muộn giống như cảnh báo sớm khi tàu đã sắp chìm.</p>
+<h2 id="tổng-kết-cho-chương-này"><a class="header" href="#tổng-kết-cho-chương-này"><strong>Tổng kết cho chương này</strong></a></h2>
+<p>Làm việc nhóm không phải là chuyện “mọi người giỏi như nhau” mà là chuyện “mọi người kết hợp đúng cách”.</p>
+<ul>
+<li>Tuckman giúp bạn hiểu nhóm thay đổi ra sao theo thời gian.</li>
+<li>SWOT giúp bạn đặt đúng người vào đúng chỗ.</li>
+<li>Giao tiếp và động viên giúp nhóm duy trì được sự bền bỉ và tinh thần tích cực.</li>
+</ul>
+<p>Dự án phần mềm chỉ chạy mượt khi nhóm chạy mượt — và nhóm chạy mượt khi họ hiểu nhau và được hỗ trợ đúng lúc.</p>
+
+                    </main>
+
+                    <nav class="nav-wrapper" aria-label="Page navigation">
+                        <!-- Mobile navigation buttons -->
+                            <a rel="prev" href="../phan-2/estimate-cost-and-manage-risks.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                                <i class="fa fa-angle-left"></i>
+                            </a>
+
+                            <a rel="next prefetch" href="../phan-3/dam-bao-chat-luong.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                                <i class="fa fa-angle-right"></i>
+                            </a>
+
+                        <div style="clear: both"></div>
+                    </nav>
+                </div>
+            </div>
+
+            <nav class="nav-wide-wrapper" aria-label="Page navigation">
+                    <a rel="prev" href="../phan-2/estimate-cost-and-manage-risks.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                        <i class="fa fa-angle-left"></i>
+                    </a>
+
+                    <a rel="next prefetch" href="../phan-3/dam-bao-chat-luong.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                        <i class="fa fa-angle-right"></i>
+                    </a>
+            </nav>
+
+        </div>
+
+
+
+
+        <script>
+            window.playground_copyable = true;
+        </script>
+
+
+        <script src="../elasticlunr.min.js"></script>
+        <script src="../mark.min.js"></script>
+        <script src="../searcher.js"></script>
+
+        <script src="../clipboard.min.js"></script>
+        <script src="../highlight.js"></script>
+        <script src="../book.js"></script>
+
+        <!-- Custom JS scripts -->
+
+
+    </div>
+    </body>
+</html>

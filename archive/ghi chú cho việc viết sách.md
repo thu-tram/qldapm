@@ -8,7 +8,7 @@ Mỗi chương đều có ba phần cố định:
 2. **Practice to Apply** – Bài tập hoặc tình huống thực hành để tự làm.
 3. **Reflection to Write** – Gợi ý viết giúp bạn biến hiểu biết thành chương sách của riêng mình.
 
----
+
 
 
 ## **Bonus Tips for Writing**

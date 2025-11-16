@@ -1,0 +1,1158 @@
+<!DOCTYPE HTML>
+<html lang="vi" class="light sidebar-visible" dir="ltr">
+    <head>
+        <!-- Book generated using mdBook -->
+        <meta charset="UTF-8">
+        <title>Một cuốn sách về quản lý dự án phần mềm</title>
+        <meta name="robots" content="noindex">
+
+
+        <!-- Custom HTML head -->
+
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="theme-color" content="#ffffff">
+
+        <link rel="icon" href="favicon.svg">
+        <link rel="shortcut icon" href="favicon.png">
+        <link rel="stylesheet" href="css/variables.css">
+        <link rel="stylesheet" href="css/general.css">
+        <link rel="stylesheet" href="css/chrome.css">
+        <link rel="stylesheet" href="css/print.css" media="print">
+
+        <!-- Fonts -->
+        <link rel="stylesheet" href="FontAwesome/css/font-awesome.css">
+        <link rel="stylesheet" href="fonts/fonts.css">
+
+        <!-- Highlight.js Stylesheets -->
+        <link rel="stylesheet" href="highlight.css">
+        <link rel="stylesheet" href="tomorrow-night.css">
+        <link rel="stylesheet" href="ayu-highlight.css">
+
+        <!-- Custom theme stylesheets -->
+
+
+        <!-- Provide site root to javascript -->
+        <script>
+            var path_to_root = "";
+            var default_theme = window.matchMedia("(prefers-color-scheme: dark)").matches ? "navy" : "light";
+        </script>
+        <!-- Start loading toc.js asap -->
+        <script src="toc.js"></script>
+    </head>
+    <body>
+    <div id="body-container">
+        <!-- Work around some values being stored in localStorage wrapped in quotes -->
+        <script>
+            try {
+                var theme = localStorage.getItem('mdbook-theme');
+                var sidebar = localStorage.getItem('mdbook-sidebar');
+
+                if (theme.startsWith('"') && theme.endsWith('"')) {
+                    localStorage.setItem('mdbook-theme', theme.slice(1, theme.length - 1));
+                }
+
+                if (sidebar.startsWith('"') && sidebar.endsWith('"')) {
+                    localStorage.setItem('mdbook-sidebar', sidebar.slice(1, sidebar.length - 1));
+                }
+            } catch (e) { }
+        </script>
+
+        <!-- Set the theme before any content is loaded, prevents flash -->
+        <script>
+            var theme;
+            try { theme = localStorage.getItem('mdbook-theme'); } catch(e) { }
+            if (theme === null || theme === undefined) { theme = default_theme; }
+            const html = document.documentElement;
+            html.classList.remove('light')
+            html.classList.add(theme);
+            html.classList.add("js");
+        </script>
+
+        <input type="checkbox" id="sidebar-toggle-anchor" class="hidden">
+
+        <!-- Hide / unhide sidebar before it is displayed -->
+        <script>
+            var sidebar = null;
+            var sidebar_toggle = document.getElementById("sidebar-toggle-anchor");
+            if (document.body.clientWidth >= 1080) {
+                try { sidebar = localStorage.getItem('mdbook-sidebar'); } catch(e) { }
+                sidebar = sidebar || 'visible';
+            } else {
+                sidebar = 'hidden';
+            }
+            sidebar_toggle.checked = sidebar === 'visible';
+            html.classList.remove('sidebar-visible');
+            html.classList.add("sidebar-" + sidebar);
+        </script>
+
+        <nav id="sidebar" class="sidebar" aria-label="Table of contents">
+            <!-- populated by js -->
+            <mdbook-sidebar-scrollbox class="sidebar-scrollbox"></mdbook-sidebar-scrollbox>
+            <noscript>
+                <iframe class="sidebar-iframe-outer" src="toc.html"></iframe>
+            </noscript>
+            <div id="sidebar-resize-handle" class="sidebar-resize-handle">
+                <div class="sidebar-resize-indicator"></div>
+            </div>
+        </nav>
+
+        <div id="page-wrapper" class="page-wrapper">
+
+            <div class="page">
+                <div id="menu-bar-hover-placeholder"></div>
+                <div id="menu-bar" class="menu-bar sticky">
+                    <div class="left-buttons">
+                        <label id="sidebar-toggle" class="icon-button" for="sidebar-toggle-anchor" title="Toggle Table of Contents" aria-label="Toggle Table of Contents" aria-controls="sidebar">
+                            <i class="fa fa-bars"></i>
+                        </label>
+                        <button id="theme-toggle" class="icon-button" type="button" title="Change theme" aria-label="Change theme" aria-haspopup="true" aria-expanded="false" aria-controls="theme-list">
+                            <i class="fa fa-paint-brush"></i>
+                        </button>
+                        <ul id="theme-list" class="theme-popup" aria-label="Themes" role="menu">
+                            <li role="none"><button role="menuitem" class="theme" id="light">Light</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="rust">Rust</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="coal">Coal</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="navy">Navy</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="ayu">Ayu</button></li>
+                        </ul>
+                        <button id="search-toggle" class="icon-button" type="button" title="Search. (Shortkey: s)" aria-label="Toggle Searchbar" aria-expanded="false" aria-keyshortcuts="S" aria-controls="searchbar">
+                            <i class="fa fa-search"></i>
+                        </button>
+                    </div>
+
+                    <h1 class="menu-title">Một cuốn sách về quản lý dự án phần mềm</h1>
+
+                    <div class="right-buttons">
+                        <a href="print.html" title="Print this book" aria-label="Print this book">
+                            <i id="print-button" class="fa fa-print"></i>
+                        </a>
+
+                    </div>
+                </div>
+
+                <div id="search-wrapper" class="hidden">
+                    <form id="searchbar-outer" class="searchbar-outer">
+                        <input type="search" id="searchbar" name="searchbar" placeholder="Search this book ..." aria-controls="searchresults-outer" aria-describedby="searchresults-header">
+                    </form>
+                    <div id="searchresults-outer" class="searchresults-outer hidden">
+                        <div id="searchresults-header" class="searchresults-header"></div>
+                        <ul id="searchresults">
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Apply ARIA attributes after the sidebar and the sidebar toggle button are added to the DOM -->
+                <script>
+                    document.getElementById('sidebar-toggle').setAttribute('aria-expanded', sidebar === 'visible');
+                    document.getElementById('sidebar').setAttribute('aria-hidden', sidebar !== 'visible');
+                    Array.from(document.querySelectorAll('#sidebar a')).forEach(function(link) {
+                        link.setAttribute('tabIndex', sidebar === 'visible' ? 0 : -1);
+                    });
+                </script>
+
+                <div id="content" class="content">
+                    <main>
+                        <h1 id="software-project-management-a-self-learning-handbook"><a class="header" href="#software-project-management-a-self-learning-handbook">Software Project Management: A Self-Learning Handbook</a></h1>
+<p><em>A practical guide to learning, practicing, and reflecting on software project management</em>.</p>
+<p>Một cuốn sách về tự học quản lý phần mềm "thực dụng" (ít nhất là cố hơn một số quyển tôi đã đọc).</p>
+<h2 id="mục-lục-của-cuốn-sách"><a class="header" href="#mục-lục-của-cuốn-sách">Mục lục của cuốn sách</a></h2>
+<h3 id="phần-i--nền-tảng-hiểu-mình-đang-quản-lý-gì"><a class="header" href="#phần-i--nền-tảng-hiểu-mình-đang-quản-lý-gì">Phần I – Nền tảng: Hiểu mình đang quản lý gì,</a></h3>
+<ul>
+<li>Bản chất của một dự án</li>
+<li>Một dự án phần mềm được quản lý như thế nào?</li>
+</ul>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="bản-chất-của-dự-án-phần-mềm-the-nature-of-software-projects"><a class="header" href="#bản-chất-của-dự-án-phần-mềm-the-nature-of-software-projects">Bản chất của dự án phần mềm (The Nature of Software Projects)</a></h1>
+<h3 id="dự-án-là-gì"><a class="header" href="#dự-án-là-gì">Dự án là gì?</a></h3>
+<p>Trước khi bắt đầu, chúng ta cần phải hiểu được <em>một dự án</em> thực sự là cái gì? Theo cá nhân mình hiểu, đó là một <em>temporary effort</em> để hoàn thành những cột mốc đề ra.</p>
+<h3 id="một-dự-án-phần-mềm-thì-có-gì-khác"><a class="header" href="#một-dự-án-phần-mềm-thì-có-gì-khác">Một dự án <em>phần mềm</em> thì có gì khác?</a></h3>
+<p>Phần này mình chưa nghĩ được cách viết</p>
+<h3 id="vì-sao-các-dự-án-lại-thất-bại"><a class="header" href="#vì-sao-các-dự-án-lại-thất-bại">Vì sao các dự án lại thất bại?</a></h3>
+<p>Bạn có bao giờ nghe câu chuyện thế này chưa: một dự án phần mềm khởi đầu cực kỳ hoành tráng, team đông đủ, công nghệ hiện đại, khách hàng tràn đầy kỳ vọng. Thế nhưng chỉ vài tháng sau, tiến độ chậm dần, chi phí tăng vọt, yêu cầu thay đổi liên tục, cuối cùng dự án phải dừng lại giữa chừng.</p>
+<p>Tại sao lại như vậy? Có phải vì lập trình viên kém? Không hẳn. Có phải vì công nghệ lỗi thời? Cũng không. Lý do chính thường đến từ một yếu tố mà nhiều người… ngại nhắc đến: quản lý dự án <sup class="footnote-reference"><a href="#1">1</a></sup>.</p>
+<p>Bạn không thể "sờ" hay "cảm thấy" được phần mềm. Mọi người chỉ thấy được sự tồn tại của phần mềm khi nó được đem ra sử dụng. Chính vì sự khác biệt đấy đã dẫn tới không ít các dự án phần mềm thất bại.</p>
+<p>Nguyên nhân cho những thất bại liên quan đến quản lý phần mềm là không ít, nếu để liệt kê ra thì nó bị quá chung chung, tuy vậy nhưng thường xoay quanh vài “cái bẫy” quen thuộc:</p>
+<ul>
+<li>Không rõ mục tiêu: team bắt tay vào làm mà chưa có định hướng chung rõ ràng.</li>
+<li>Yêu cầu thay đổi liên tục: khách hàng nói một kiểu hôm nay, ngày mai lại muốn khác.</li>
+<li>Thiếu phối hợp: mỗi thành viên làm theo ý mình, không có ai kết nối bức tranh toàn cảnh.</li>
+<li>Kiểm soát yếu kém: tiến độ chậm mà không ai phát hiện, đến khi nhận ra thì đã muộn.</li>
+</ul>
+<h3 id="các-loại-dự-án"><a class="header" href="#các-loại-dự-án">Các loại dự án</a></h3>
+<p>Gồm có: research-based, development, evaluation, industry, problem-solving</p>
+<div class="footnote-definition" id="1"><sup class="footnote-definition-label">1</sup>
+<p>https://bimatlaptrinh.com/tong-quan-ve-quan-ly-du-an-phan-mem/</p>
+</div>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="Để-quản-lý-một-dự-án-phần-mềm"><a class="header" href="#Để-quản-lý-một-dự-án-phần-mềm">Để quản lý một dự án phần mềm</a></h1>
+<p>Quản lý dự án là nhiệm vụ của Project Manager, như mấy chú công an đứng điều phối giao thông ở các ngã tư lớn vậy. Vậy thì Project Manager được hiểu một cách "chuyên nghiệp" là gì?</p>
+<p>Project Manager là người được tổ chức giao nhiệm vụ dẫn dắt đôi ngũ dự án (ở đây là dự án phần mềm) để đạt được các mục tiêu của dự án.</p>
+<p>Project Manager tham gia vào dự án xuyên suốt vòng đời dự án, theo tiêu chuẩn quốc tế thì gồm 5 quy trình: Initiating (Khởi tạo), Planning (Lập kế hoạch), Executing (Thực thi), Monitoring &amp; Controlling (Giám sát và Kiểm soát) và Closing (Đóng dự án).</p>
+<p>Để đạt được mục tiêu dự án, Project Manager sẽ triển khai nhiều chức năng khác nhau, như lập kế hoạch, quản lý các quy trình, giám sát hiệu suất làm việc nhóm, làm việc với các bên liên quan, .v.v.. Đây chính là vai trò của một PM.</p>
+<p>Những kĩ năng của một Project Manager thì nhiều vô kể nên chúng ta sẽ chỉ lấy ra một số: Lãnh đạo, lập kế hoạch, quản trị rủi ro (Risk Management)</p>
+<h3 id="tư-duy-hệ-thống"><a class="header" href="#tư-duy-hệ-thống">Tư duy hệ thống</a></h3>
+<p><em>Quản lý con người, quy trình và sản phẩm cùng lúc</em>.</p>
+<p>Phần này vẫn đang trong quá trình viết</p>
+<h3 id="những-yếu-tố-cho-con-người-của-pm"><a class="header" href="#những-yếu-tố-cho-con-người-của-pm">Những yếu tố cho <em>con người</em> của PM</a></h3>
+<p>Một kiểu <em>danh sách</em> chỉ mang tính chất tham khảo. Mình cảm thấy là cần có ví dụ thực tế hơn và viết <em>dễ trôi</em> hơn, nhưng mà lười quá nên để viết sau, đặt trước TODO nhé.</p>
+<h4 id="giao-tiếp-rõ-ràng-và-hiệu-quả"><a class="header" href="#giao-tiếp-rõ-ràng-và-hiệu-quả">Giao tiếp rõ ràng và hiệu quả</a></h4>
+<p>Truyền đạt mục tiêu, yêu cầu, tiến độ và rủi ro sao cho mọi thành viên hiểu và đồng thuận.</p>
+<p><strong>Trường hợp:</strong> Tổ chức một buổi mock kick-off với bạn học hoặc đồng nghiệp: bạn chuẩn bị slide mục tiêu dự án, phạm vi, tiêu chí bàn giao, và trình bày 10 phút; sau đó nhận phản hồi từ nhóm về điểm chưa rõ, câu hỏi thường gặp, và điều chỉnh cách diễn đạt.</p>
+<p>Bạn có thể ghi âm hoặc quay video bài trình bày, xem lại để rút kinh nghiệm; tập viết email tóm tắt cuộc họp 3 câu (mục tiêu, quyết định, hành động).</p>
+<h4 id="Ưu-tiên-và-quản-lý-phạm-vi"><a class="header" href="#Ưu-tiên-và-quản-lý-phạm-vi">Ưu tiên và quản lý phạm vi</a></h4>
+<p>Quyết định cái nào làm trước, cái nào hoãn, tránh scope creep bằng cách cân nhắc giá trị so với chi phí.</p>
+<p>Làm bài tập case study: cho danh sách 12 tính năng với nguồn lực giới hạn, yêu cầu bạn sắp xếp backlog để tối đa giá trị trong 3 sprint. Trình bày ra lý do lựa chọn (impact; effort) và viết sprint plan.</p>
+<p><strong>Bạn có thể thử</strong> sử dụng ma trận Value vs Effort cho mỗi yêu cầu; thực hành từ chối hoặc hoãn yêu cầu giả định bằng câu nói chuẩn mực và lịch sự.</p>
+<h4 id="quản-trị-rủi-ro-và-giải-quyết-vấn-đề"><a class="header" href="#quản-trị-rủi-ro-và-giải-quyết-vấn-đề">Quản trị rủi ro và giải quyết vấn đề</a></h4>
+<p>Nhận diện rủi ro sớm, đánh giá khả năng/ảnh hưởng, xây dựng biện pháp giảm thiểu và kế hoạch dự phòng.</p>
+<p>Trường hợp: Làm bài tập role-play: giả định sprint bị chậm do thiếu tài nguyên; bạn phải lập risk register, đề xuất mitigations (thuê ngoài, giảm scope, reassign), và trình bày trade-off cho Product Owner.</p>
+<p><strong>Bạn có thể thử</strong> tạo habit hàng tuần: liệt kê 5 rủi ro hiện tại cho một dự án học tập và cập nhật trạng thái xử lý; luyện kịch bản "nếu-then".</p>
+<h4 id="lãnh-đạo-phục-vụ-và-quản-lý-các-bên-liên-quan"><a class="header" href="#lãnh-đạo-phục-vụ-và-quản-lý-các-bên-liên-quan">Lãnh đạo phục vụ và quản lý các bên liên quan</a></h4>
+<p>Dẫn dắt nhóm theo hướng hỗ trợ, tạo điều kiện để team thành công; cân bằng yêu cầu từ stakeholders khác nhau.</p>
+<p>Trường hợp: Thực hành một buổi retrospective giả định: bạn làm facilitator, dùng kỹ thuật hoạt động (Start/Stop/Continue), giải quyết xung đột giữa dev và QA, và ghi lại hành động cải tiến.</p>
+<p><strong>Bạn có thể thử</strong> Học các kỹ thuật lắng nghe chủ động; lập stakeholder map cho một dự án giả lập và soạn chiến lược tương tác (frequency, channel, expected outcome).</p>
+<h4 id="hiểu-biết-kỹ-thuật-và-ra-quyết-định-dựa-trên-dữ-liệu"><a class="header" href="#hiểu-biết-kỹ-thuật-và-ra-quyết-định-dựa-trên-dữ-liệu">Hiểu biết kỹ thuật và ra quyết định dựa trên dữ liệu</a></h4>
+<p>Nắm được đủ kiến thức kỹ thuật để đặt câu hỏi đúng, đánh giá ước lượng kỹ thuật và đọc các chỉ số hiệu suất.</p>
+<p>Trường hợp: Tham gia code review nhẹ hoặc pairing session với developer để hiểu trade-offs giữa hai giải pháp; xây dựng dashboard đơn giản (ví dụ: lead time, cycle time) từ dữ liệu sprint giả lập và đưa ra quyết định cải tiến quy trình.</p>
+<p><strong>Bạn có thể thử</strong> Học khái niệm cơ bản về kiến trúc phần mềm, CI/CD, testing; thực hành phân tích một biểu đồ burn-down và đề xuất 2 hành động dựa trên dữ liệu.</p>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="chọn-mô-hình-sdlc"><a class="header" href="#chọn-mô-hình-sdlc">Chọn mô hình SDLC</a></h1>
+<p>Không có dự án phần mềm nào giống nhau. Có dự án giống như nấu một món ăn có công thức chuẩn, chỉ cần làm đúng là được. Có dự án lại giống như mở quán cà phê mới: thử – sai – chỉnh – thử tiếp. Vì thế, không có một mô hình phát triển nào là “chân lý tuyệt đối”. Chỉ có mô hình <em>phù hợp</em> với bối cảnh.</p>
+<p>Chương này giúp bạn nhìn những mô hình SDLC phổ biến như những công cụ — không phải như những điều luật — và quan sát cách quy mô, rủi ro, và sự thay đổi ảnh hưởng đến quyết định chọn mô hình.</p>
+<h2 id="xàm-xàm-về-sdlc"><a class="header" href="#xàm-xàm-về-sdlc">Xàm xàm về SDLC</a></h2>
+<p>SDLC (Software Development Life Cycle) là một quá trình đi theo suốt trong một dự án phần mềm, trong một tổ chức phần mềm. Nó bao gồm một kế hoạch chi tiết mô tả cách phát triển, duy trì, thay thế và thay đổi hoặc nâng cao phần mềm cụ thể. Vòng đời xác định một phương pháp để cải thiện chất lượng phần mềm và quy trình phát triển tổng thể.</p>
+<p>Mỗi mô hình sẽ có sự khác nhau, tuy nhiên, mỗi mô hình bao gồm tất cả hoặc một số giai đoạn / hoạt động / nhiệm vụ sau.</p>
+<h3 id="planning---lập-kế-hoạch"><a class="header" href="#planning---lập-kế-hoạch">Planning - Lập kế hoạch</a></h3>
+<ul>
+<li>Phân tích yêu cầu được thực hiện bởi các senior member của nhóm với đầu vào từ khách hàng, bộ phận bán hàng, khảo sát thị trường và các chuyên gia trong ngành.</li>
+<li>Lập kế hoạch cho các yêu cầu đảm bảo chất lượng và xác định các rủi ro liên quan đến dự án.</li>
+</ul>
+<h3 id="defining---xác-định-yêu-cầu"><a class="header" href="#defining---xác-định-yêu-cầu">Defining - Xác định yêu cầu</a></h3>
+<ul>
+<li>Xác định rõ ràng và ghi lại các yêu cầu.</li>
+<li>Thực hiện xác định yêu cầu thông qua một tài liệu SRS (Software Requirement Specification) bao gồm tất cả các yêu cầu sản phẩm được thiết kế và phát triển trong suốt vòng đời của dự án.</li>
+</ul>
+<h3 id="designing---phân-tích-thiết-kế-kiến-trúc-hệ-thống"><a class="header" href="#designing---phân-tích-thiết-kế-kiến-trúc-hệ-thống">Designing - Phân tích thiết kế kiến trúc hệ thống</a></h3>
+<ul>
+<li>Trong giai đoạn này, thiết kế hệ thống và phần mềm được chuẩn bị từ các đặc tả yêu cầu đã được nghiên cứu trong giai đoạn đầu tiên.</li>
+<li>Thiết kế hệ thống giúp xác định các yêu cầu phần cứng và kiến trúc hệ thống tổng thể.</li>
+</ul>
+<h3 id="building---phát-triển"><a class="header" href="#building---phát-triển">Building - Phát triển</a></h3>
+<ul>
+<li>Khi nhận được tài liệu thiết kế hệ thống, công việc được chia thành các module nhỏ và coding được bắt đầu.</li>
+<li>Đây là giai đoạn trọng tâm và dài nhất của vòng đời phát triển phần mềm.</li>
+</ul>
+<h3 id="testing---kiếm-thử"><a class="header" href="#testing---kiếm-thử">Testing - Kiếm thử</a></h3>
+<ul>
+<li>Sau khi coding được phát triển, nó được kiểm tra dựa trên các yêu cầu để đảm bảo rằng sản phẩm thực sự hoạt động đúng trong giai đoạn phân tích yêu cầu.</li>
+<li>Trong giai đoạn này tất cả các loại kiểm thử chức năng như kiểm thử đơn vị, kiểm thử tích hợp, kiểm thử hệ thống, kiểm thử chấp nhận được thực hiện cũng như test phi chức năng cũng được thực hiện.</li>
+</ul>
+<h3 id="deployment---phát-hànhtriển-khai"><a class="header" href="#deployment---phát-hànhtriển-khai">Deployment - Phát hành/triển khai</a></h3>
+<ul>
+<li>Sau khi thử nghiệm thành công, sản phẩm được phân phối / triển khai cho khách hàng để họ sử dụng.</li>
+<li>Khách hàng sẽ thực hiện test beta. Nếu có bất kỳ vấn đề nào xảy ra, thì họ sẽ báo cáo cho nhóm kỹ thuật để được hỗ trợ.</li>
+</ul>
+<h3 id="maintenance---bảo-trì"><a class="header" href="#maintenance---bảo-trì">Maintenance - Bảo trì</a></h3>
+<ul>
+<li>Trong quá trình bảo trì của SDLC, hệ thống được đánh giá để đảm bảo nó không trở nên lỗi thời.</li>
+<li>Một khi khách hàng bắt đầu sử dụng hệ thống đã phát triển thì những vấn đề thực sự xuất hiện và cần được giải quyết theo thời gian.</li>
+</ul>
+<h2 id="1-những-mô-hình-sdlc-bạn-cần-biết"><a class="header" href="#1-những-mô-hình-sdlc-bạn-cần-biết"><strong>1. Những mô hình SDLC bạn cần biết</strong></a></h2>
+<h3 id="waterfall--dòng-thác-một-chiều"><a class="header" href="#waterfall--dòng-thác-một-chiều"><strong>Waterfall – Dòng thác một chiều</strong></a></h3>
+<p>Đây là mô hình cổ điển: yêu cầu → thiết kế → lập trình → kiểm thử → triển khai → bảo trì.
+Mỗi giai đoạn kết thúc rồi mới chuyển sang giai đoạn tiếp theo. Không quay lại, trừ khi cực kỳ cần thiết.</p>
+<p><strong>Điểm phù hợp:</strong></p>
+<ul>
+<li>yêu cầu rõ ngay từ đầu,</li>
+<li>quy trình nghiêm ngặt,</li>
+<li>tài liệu là ưu tiên.</li>
+</ul>
+<p><strong>Hạn chế:</strong></p>
+<ul>
+<li>thay đổi khó khăn,</li>
+<li>sản phẩm chỉ xuất hiện ở cuối chu kỳ.</li>
+</ul>
+<h3 id="incremental--làm-từng-phần-bàn-giao-từng-phần"><a class="header" href="#incremental--làm-từng-phần-bàn-giao-từng-phần"><strong>Incremental – Làm từng phần, bàn giao từng phần</strong></a></h3>
+<p>Thay vì làm cả hệ thống một lần, bạn chia dự án thành nhiều “mảnh”: mỗi mảnh được phân tích, thiết kế, lập trình, kiểm thử riêng, rồi ghép lại.</p>
+<p><strong>Điểm phù hợp:</strong></p>
+<ul>
+<li>muốn có sản phẩm sớm,</li>
+<li>dự án lớn cần chia nhỏ để giảm rủi ro.</li>
+</ul>
+<p><strong>Hạn chế:</strong></p>
+<ul>
+<li>thiết kế tổng thể phải chắc chắn ngay từ đầu,</li>
+<li>nguy cơ các mảnh rời rạc nếu quản lý kém.</li>
+</ul>
+<h3 id="prototyping--làm-thử-một-bản-mẫu-để-hiểu-rõ-vấn-đề"><a class="header" href="#prototyping--làm-thử-một-bản-mẫu-để-hiểu-rõ-vấn-đề"><strong>Prototyping – Làm thử một bản mẫu để hiểu rõ vấn đề</strong></a></h3>
+<p>Khi yêu cầu mơ hồ, bạn làm một bản demo nhanh (prototype) nhằm để khách hàng nhìn – sờ – phản hồi. Không phải bản hoàn chỉnh, chỉ là mô phỏng.</p>
+<p><strong>Điểm phù hợp:</strong></p>
+<ul>
+<li>khách hàng không diễn đạt yêu cầu tốt,</li>
+<li>giao diện là yếu tố chính,</li>
+<li>cần xác nhận ý tưởng trước.</li>
+</ul>
+<p><strong>Hạn chế:</strong></p>
+<ul>
+<li>khách hàng dễ “yêu” bản prototype và tưởng nó là sản phẩm thật,</li>
+<li>có nguy cơ “quá gắn bó” với bản mẫu và làm sai hướng.</li>
+</ul>
+<h3 id="agile--linh-hoạt-lặp-lại-ưu-tiên-giá-trị-người-dùng"><a class="header" href="#agile--linh-hoạt-lặp-lại-ưu-tiên-giá-trị-người-dùng"><strong>Agile – Linh hoạt, lặp lại, ưu tiên giá trị người dùng</strong></a></h3>
+<p>Agile chia dự án thành các vòng lặp ngắn (sprint). Mỗi vòng lặp tạo ra một phiên bản nhỏ có thể dùng được. Khách hàng tham gia liên tục, phản hồi liên tục.</p>
+<p><strong>Điểm phù hợp:</strong></p>
+<ul>
+<li>yêu cầu thay đổi thường xuyên,</li>
+<li>ưu tiên tốc độ và thử nghiệm,</li>
+<li>sản phẩm hướng người dùng nhiều hơn là tài liệu.</li>
+</ul>
+<p><strong>Hạn chế:</strong></p>
+<ul>
+<li>yêu cầu nhóm làm việc kỷ luật, liên tục trao đổi,</li>
+<li>khó dự đoán chính xác tổng chi phí khi dự án mở rộng.</li>
+</ul>
+<h2 id="2-khi-nào-chọn-mô-hình-nào"><a class="header" href="#2-khi-nào-chọn-mô-hình-nào"><strong>2. Khi nào chọn mô hình nào?</strong></a></h2>
+<p>Thay vì học thuộc lý thuyết, hãy nhìn các mô hình như những “phong cách làm việc”.</p>
+<h3 id="chọn-waterfall-khi"><a class="header" href="#chọn-waterfall-khi"><strong>Chọn Waterfall khi:</strong></a></h3>
+<ul>
+<li>Bạn biết gần như chính xác mình phải xây thứ gì.</li>
+<li>Quy trình liên quan đến pháp lý, an toàn, hoặc dữ liệu quan trọng.</li>
+<li>Cần tài liệu đầy đủ để kiểm tra, audit.</li>
+</ul>
+<p><strong>Ví dụ:</strong> Hệ thống quản lý bệnh viện, phần mềm cho ngân hàng.</p>
+<h3 id="chọn-incremental-khi"><a class="header" href="#chọn-incremental-khi"><strong>Chọn Incremental khi:</strong></a></h3>
+<ul>
+<li>Bạn có thiết kế tổng thể nhưng muốn chia nhỏ rủi ro.</li>
+<li>Bạn cần kiểm chứng từng module trước khi ghép lại.</li>
+<li>Sản phẩm có thể tách thành nhiều phần độc lập tương đối.</li>
+</ul>
+<p><strong>Ví dụ:</strong> Hệ thống học trực tuyến gồm module video, giao bài, chấm điểm.</p>
+<h3 id="chọn-prototyping-khi"><a class="header" href="#chọn-prototyping-khi"><strong>Chọn Prototyping khi:</strong></a></h3>
+<ul>
+<li>Khách hàng mơ hồ: “Anh làm cho tôi một cái app… kiểu như… mạng xã hội nhưng để học tiếng Anh.”</li>
+<li>Bạn cần phản hồi nhanh trước khi cam kết phát triển chính thức.</li>
+<li>Giao diện hoặc trải nghiệm người dùng là yếu tố quan trọng nhất.</li>
+</ul>
+<p><strong>Ví dụ:</strong> Ứng dụng startup mới chưa rõ thị trường.</p>
+<h3 id="chọn-agile-khi"><a class="header" href="#chọn-agile-khi"><strong>Chọn Agile khi:</strong></a></h3>
+<ul>
+<li>Bạn kỳ vọng thay đổi nhiều trong suốt dự án.</li>
+<li>Bạn muốn “ra sản phẩm sớm – học – sửa – lặp lại.”</li>
+<li>Khách hàng tham gia tích cực vào quá trình.</li>
+<li>Dự án hướng tới người dùng cuối, cần cải tiến liên tục.</li>
+</ul>
+<p><strong>Ví dụ:</strong> Website thương mại điện tử, ứng dụng mobile nhỏ.</p>
+<h2 id="3-Ảnh-hưởng-của-quy-mô-rủi-ro-và-yêu-cầu-thay-đổi"><a class="header" href="#3-Ảnh-hưởng-của-quy-mô-rủi-ro-và-yêu-cầu-thay-đổi"><strong>3. Ảnh hưởng của quy mô, rủi ro và yêu cầu thay đổi</strong></a></h2>
+<p>Khi quyết định mô hình, bạn không chọn theo cảm tính. Ba yếu tố khiến quyết định trở nên hợp lý:</p>
+<h3 id="1-quy-mô-dự-án-project-size"><a class="header" href="#1-quy-mô-dự-án-project-size"><strong>1. Quy mô dự án (Project Size)</strong></a></h3>
+<p><strong>Dự án nhỏ → linh hoạt tốt → Agile/Prototyping thường phù hợp.</strong>
+Ví dụ: website giới thiệu công ty, app nhắc uống nước.</p>
+<p><strong>Dự án lớn → cần cấu trúc → Incremental/Waterfall dễ quản lý hơn.</strong>
+Ví dụ: hệ thống ERP cho doanh nghiệp, hệ thống y tế quốc gia.</p>
+<p>Quy mô lớn thường kéo theo:</p>
+<ul>
+<li>nhiều người liên quan,</li>
+<li>nhiều module cần phối hợp,</li>
+<li>nhiều rủi ro tích lũy.</li>
+</ul>
+<p>Bạn không muốn một dự án 100 người chạy theo phong cách “tự do một chút cũng không sao”.</p>
+<h3 id="2-rủi-ro-risk-level"><a class="header" href="#2-rủi-ro-risk-level"><strong>2. Rủi ro (Risk Level)</strong></a></h3>
+<p><strong>Rủi ro kỹ thuật cao → dùng Prototyping hoặc Incremental.</strong>
+Bạn thử từng module, từng ý tưởng trước khi tiến xa.</p>
+<p><strong>Rủi ro thay đổi yêu cầu → Agile phát huy sức mạnh.</strong>
+Khách hàng đổi ý ư? Cứ để sprint mới xử lý.</p>
+<p><strong>Rủi ro pháp lý → Waterfall ổn định hơn.</strong>
+Bạn không muốn “thử nghiệm” trong môi trường phải tuân thủ luật.</p>
+<h3 id="3-mức-độ-thay-đổi-yêu-cầu-requirement-volatility"><a class="header" href="#3-mức-độ-thay-đổi-yêu-cầu-requirement-volatility"><strong>3. Mức độ thay đổi yêu cầu (Requirement Volatility)</strong></a></h3>
+<p>Đây là yếu tố then chốt.</p>
+<div class="table-wrapper"><table><thead><tr><th>Mức độ thay đổi</th><th>Mô hình phù hợp</th></tr></thead><tbody>
+<tr><td>Thấp</td><td>Waterfall, Incremental</td></tr>
+<tr><td>Trung bình</td><td>Incremental, Prototyping</td></tr>
+<tr><td>Cao</td><td>Agile</td></tr>
+</tbody></table>
+</div>
+<p>Nếu bạn biết yêu cầu sẽ thay đổi liên tục, Waterfall sẽ trở thành chiếc áo giáp cứng nhưng… quá cứng. Agile trong trường hợp này giống như áo khoác mềm – dễ xoay chuyển hơn nhiều.</p>
+<h2 id="tổng-kết-nhỏ-cho-chương-này"><a class="header" href="#tổng-kết-nhỏ-cho-chương-này"><strong>Tổng kết nhỏ cho chương này</strong></a></h2>
+<ul>
+<li>Waterfall là sự chắc chắn.</li>
+<li>Agile là sự linh hoạt.</li>
+<li>Incremental là cách chia nhỏ rủi ro.</li>
+<li>Prototyping là cách hiểu rõ vấn đề trước khi cam kết.</li>
+</ul>
+<p>Bạn chọn mô hình không phải để “đúng sách”, mà để phù hợp với:</p>
+<ul>
+<li>quy mô dự án,</li>
+<li>mức độ rủi ro,</li>
+<li>tốc độ và tần suất thay đổi yêu cầu.</li>
+</ul>
+<p>Nghệ thuật của project manager nằm ở chỗ nhìn thấy hoàn cảnh, rồi chọn công cụ phù hợp — giống như đầu bếp nhìn nguyên liệu rồi quyết định dùng nồi hay chảo.</p>
+<h2 id="ví-dụ"><a class="header" href="#ví-dụ">Ví dụ</a></h2>
+<p>Bây giờ ta hãy thử xét hai trường hợp: So sánh hai mô hình (Waterfall vs Agile) dựa trên một ví dụ: “Xây dựng website thương mại điện tử nhỏ” vs “Hệ thống quản lý bệnh viện</p>
+<h3 id="1-trường-hợp-1-xây-dựng-một-website-thương-mại-điện-tử-nhỏ"><a class="header" href="#1-trường-hợp-1-xây-dựng-một-website-thương-mại-điện-tử-nhỏ"><strong>1. Trường hợp 1: Xây dựng một website thương mại điện tử nhỏ</strong></a></h3>
+<p>Hãy hình dung bạn đang phát triển một trang bán áo thun đơn giản. Yêu cầu không quá bí ẩn:
+đăng ký – đăng nhập – giỏ hàng – danh sách sản phẩm – thanh toán.</p>
+<p>Ở đây, <strong>thay đổi</strong> là chuyện hiển nhiên: khách hàng thường nghĩ ra tính năng mới mỗi tuần, thiết kế thay đổi, khuyến mãi thay đổi, người bán thêm tính năng chat khách hàng rồi lại muốn bỏ. Mọi thứ giống như chơi lego: tháo lắp nhanh, thử nghiệm nhanh, sửa sai nhanh.</p>
+<p>Trong môi trường như vậy, <strong>Agile hợp cơ địa hơn</strong>.</p>
+<p>Nó cho phép nhóm:</p>
+<ul>
+<li>phát triển từng tính năng nhỏ và gửi bản demo sớm cho khách hàng,</li>
+<li>thay đổi kế hoạch giữa chừng mà không phải đập bỏ cả dự án,</li>
+<li>ưu tiên trải nghiệm người dùng – thứ thường thay đổi liên tục trong thương mại điện tử.</li>
+</ul>
+<p>Nếu dùng Waterfall, bạn sẽ bị mắc kẹt trong bản tài liệu yêu cầu “đã đóng băng”, nhưng khách hàng thương mại điện tử thì hiếm khi đóng băng thứ gì.</p>
+<h3 id="2-trường-hợp-2-hệ-thống-quản-lý-bệnh-viện"><a class="header" href="#2-trường-hợp-2-hệ-thống-quản-lý-bệnh-viện"><strong>2. Trường hợp 2: Hệ thống quản lý bệnh viện</strong></a></h3>
+<p>Giờ tưởng tượng bạn được giao xây một hệ thống quản lý hồ sơ bệnh nhân, thuốc, lịch khám, quản lý bác sĩ… Toàn những thứ đụng tới <strong>tính mạng</strong>, quy trình pháp lý, và dữ liệu nhạy cảm.</p>
+<p>Ở đây, thay đổi lung tung không chỉ gây rắc rối — nó nguy hiểm.
+Quy trình bệnh viện thường có cấu trúc rõ ràng: mỗi bước, mỗi biểu mẫu, mỗi thông tin đều có quy tắc.</p>
+<p>Đối với dạng dự án này, <strong>Waterfall lại trở nên hợp lý</strong>.</p>
+<p>Nó phù hợp vì:</p>
+<ul>
+<li>cần phân tích yêu cầu thật kỹ trước khi viết bất kỳ dòng code nào,</li>
+<li>tài liệu phải rõ ràng để kiểm tra tuân thủ pháp luật,</li>
+<li>quá trình kiểm thử phải diễn ra theo từng pha có kiểm soát chặt chẽ,</li>
+<li>mỗi thay đổi cần đánh giá tác động lớn (không đơn giản như thêm nút “Khuyến mãi”).</li>
+</ul>
+<p>Một nhóm Agile vẫn có thể áp dụng trong một số module, nhưng tổng thể dự án thường đòi hỏi cấu trúc vận hành ổn định, tuần tự — và đó toàn là tính cách của Waterfall.</p>
+<p>Nếu ví dự án như nấu ăn:</p>
+<ul>
+<li>
+<p><strong>Website thương mại điện tử nhỏ</strong> giống như mở một quán đồ ăn nhanh: khách đổi ý liên tục, menu linh hoạt, thử nghiệm món mới liên tục. Agile là phong cách hợp lý: vừa nấu vừa nếm.</p>
+</li>
+<li>
+<p><strong>Hệ thống quản lý bệnh viện</strong> lại giống như làm bếp cho một nhà hàng phục vụ dị ứng nghiêm ngặt: phải đo lường chính xác, công thức chuẩn, quy trình cố định. Waterfall rất tự nhiên trong bối cảnh này.</p>
+</li>
+</ul>
+<h2 id="tham-khảo"><a class="header" href="#tham-khảo">Tham khảo</a></h2>
+<ul>
+<li><a href="https://viblo.asia/p/cac-mo-hinh-phat-trien-phan-mem-GrLZDwbgKk0">Các mô hình phát triển phần mềm</a></li>
+</ul>
+<h2 id="không-có-mô-hình-nào-là-hoàn-hảo-chỉ-có-mô-hình-phù-hợp"><a class="header" href="#không-có-mô-hình-nào-là-hoàn-hảo-chỉ-có-mô-hình-phù-hợp">Không có mô hình nào là hoàn hảo, chỉ có mô hình phù hợp.</a></h2>
+<p>Như trên, bạn đã có thể thấy rằng...</p>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="work-breakdown-structure-wbs-milestones-và-critical-path"><a class="header" href="#work-breakdown-structure-wbs-milestones-và-critical-path"><strong>Work Breakdown Structure (WBS), Milestones và Critical Path</strong></a></h1>
+<p>Khi bạn bắt đầu lập kế hoạch cho một dự án phần mềm, cảm giác đầu tiên thường là hỗn độn: quá nhiều thứ phải làm, quá nhiều câu hỏi chưa rõ. WBS, milestones và critical path sinh ra để biến mớ hỗn độn đó thành một bản đồ có thể đi theo.</p>
+<h2 id="work-breakdown-structure-wbs-cách-biến-thứ-phức-tạp-thành-từng-miếng-nhỏ"><a class="header" href="#work-breakdown-structure-wbs-cách-biến-thứ-phức-tạp-thành-từng-miếng-nhỏ"><strong>Work Breakdown Structure (WBS): cách biến thứ phức tạp thành từng miếng nhỏ</strong></a></h2>
+<p>WBS là nghệ thuật chia nhỏ một dự án lớn thành các phần đủ nhỏ để quản lý.
+Bạn cứ tưởng tượng bạn đang tháo một chiếc máy tính thành từng linh kiện: từ cái tổng thể → module → chức năng → nhiệm vụ cụ thể.</p>
+<p>Một WBS tốt có ba đặc điểm:</p>
+<ul>
+<li>mô tả <em>công việc</em>, không mô tả con người hay công cụ,</li>
+<li>chia nhỏ đến mức “có thể ước lượng được thời gian và công sức”,</li>
+<li>tạo ra một bức tranh tổng thể: biết mình cần làm <em>gì</em>, trước khi nghĩ đến “làm <em>khi nào</em>”.</li>
+</ul>
+<p><strong>Ví dụ (ứng dụng quản lý chi tiêu cá nhân):</strong></p>
+<pre><code class="language-markdown">1. **Phân tích yêu cầu**
+    1.1 Thu thập yêu cầu người dùng
+    1.2 Xác định phạm vi tính năng
+2. **Thiết kế hệ thống**
+    2.1 Thiết kế UI màn hình chính
+    2.2 Thiết kế cấu trúc database
+3. **Phát triển**
+    3.1 Chức năng thêm giao dịch
+    3.2 Chức năng thống kê tháng
+4. **Kiểm thử**
+    4.1 Kiểm thử đơn vị
+    4.2 Kiểm thử tích hợp
+5. **Triển khai**
+    5.1 Đóng gói ứng dụng
+    5.2 Đăng tải lên store
+</code></pre>
+<p>Từ đây, mọi thứ trở nên “hữu hình” hơn. Bạn không còn phải ghi “Làm app”, mà ghi “Viết chức năng thêm giao dịch”, và điều này mới thật sự lập kế hoạch được.</p>
+<h2 id="milestones-những-cột-mốc-đánh-dấu-hành-trình"><a class="header" href="#milestones-những-cột-mốc-đánh-dấu-hành-trình"><strong>Milestones: những cột mốc đánh dấu hành trình</strong></a></h2>
+<p>Milestone là điểm mà tại đó bạn hoàn thành một phần quan trọng của dự án. Nó không phải nhiệm vụ, mà là dấu hiệu: “Ta đã tới được đây rồi.”</p>
+<p>Bạn có thể nghĩ milestone giống như checkpoint trong trò chơi — đạt được nó nghĩa là bạn không phải chơi lại từ đầu nếu có lỗi xảy ra.</p>
+<p><strong>Tiếp tục ví dụ ứng dụng quản lý chi tiêu:</strong></p>
+<ul>
+<li>Milestone 1: Hoàn thành phân tích yêu cầu</li>
+<li>Milestone 2: Hoàn thành thiết kế giao diện và database</li>
+<li>Milestone 3: Bản chạy thử với 2 chức năng chính</li>
+<li>Milestone 4: Hoàn thành kiểm thử toàn bộ</li>
+<li>Milestone 5: Ứng dụng sẵn sàng triển khai</li>
+</ul>
+<p>Milestones giúp nhóm theo dõi tiến độ theo <em>chặng</em>, không phải theo <em>việc lặt vặt</em>.
+Chúng cũng là thứ mà lãnh đạo hay khách hàng quan tâm: điểm đến, không phải từng bước chân.</p>
+<h2 id="critical-path-con-đường-mà-nếu-trễ-một-bước-cả-dự-án-trễ-theo"><a class="header" href="#critical-path-con-đường-mà-nếu-trễ-một-bước-cả-dự-án-trễ-theo"><strong>Critical Path: con đường mà nếu trễ một bước, cả dự án trễ theo</strong></a></h2>
+<p>Critical path (đường găng) là chuỗi công việc <em>không được phép trễ</em>, vì trễ một việc kéo theo toàn bộ dự án trễ. Đó là “xương sống thời gian” của dự án.</p>
+<p>Để tìm critical path, bạn cần hai thứ:</p>
+<ol>
+<li><strong>Danh sách công việc</strong> (từ WBS)</li>
+<li><strong>Phụ thuộc giữa các công việc</strong></li>
+</ol>
+<p>Bạn vẽ chúng thành một mạng lưới: công việc A xong mới làm B, B xong mới làm C…
+Đường có tổng thời gian dài nhất chính là critical path.</p>
+<p><strong>Ví dụ thu nhỏ:</strong>
+Giả sử bạn có 5 nhiệm vụ với thời gian dự kiến:</p>
+<ul>
+<li>A: Thiết kế UI — 4 ngày</li>
+<li>B: Thiết kế database — 3 ngày</li>
+<li>C: Lập trình chức năng 1 — 5 ngày (phụ thuộc A)</li>
+<li>D: Lập trình chức năng 2 — 4 ngày (phụ thuộc B)</li>
+<li>E: Tích hợp &amp; kiểm thử — 3 ngày (phụ thuộc C và D)</li>
+</ul>
+<p>Hai chuỗi công việc:</p>
+<ul>
+<li>A → C → E = 4 + 5 + 3 = <strong>12 ngày</strong></li>
+<li>B → D → E = 3 + 4 + 3 = <strong>10 ngày</strong></li>
+</ul>
+<p>Vậy <strong>critical path = A → C → E</strong>.
+Nếu A trễ 1 ngày, cả dự án trễ 1 ngày.
+Nếu D trễ 1 ngày, bạn vẫn còn “đệm” vì nó không nằm trên critical path.</p>
+<p>Critical path dạy ta một bài học nhỏ nhưng sắc:
+<em>Bạn không cần kiểm soát mọi thứ, chỉ cần kiểm soát đúng thứ.</em></p>
+<h2 id="khi-kết-hợp-cả-ba"><a class="header" href="#khi-kết-hợp-cả-ba"><strong>Khi kết hợp cả ba</strong></a></h2>
+<ul>
+<li><strong>WBS</strong> giúp bạn biết <em>phải làm gì</em>.</li>
+<li><strong>Milestones</strong> giúp bạn biết <em>đã đi đến đâu</em>.</li>
+<li><strong>Critical path</strong> giúp bạn biết <em>cần ưu tiên điều gì để không trễ</em>.</li>
+</ul>
+<p>Ba thứ này tạo nên bộ công cụ cốt lõi mà bất kỳ project manager nào cũng dùng, dù là quản lý dự án phần mềm, truyền thông hay xây dựng.</p>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="estimating-cost-and-managing-risk"><a class="header" href="#estimating-cost-and-managing-risk">Estimating Cost and Managing Risk</a></h1>
+<h2 id="estimating-cost-học-cách-đoán-điều-chưa-từng-tồn-tại"><a class="header" href="#estimating-cost-học-cách-đoán-điều-chưa-từng-tồn-tại"><strong>Estimating Cost: Học cách đoán điều chưa từng tồn tại</strong></a></h2>
+<p>Ước lượng trong phần mềm là một trò chơi kỳ lạ: bạn phải dự đoán công sức cần bỏ ra để xây dựng một thứ chưa tồn tại, với một đội ngũ chưa chắc đã làm việc cùng nhau, bằng một quy trình có thể thay đổi giữa chừng. Không lạ gì khi hầu hết ước lượng đều sai — nhưng sai theo cách có hệ thống thì lại là một kỹ năng.</p>
+<p>Dưới đây là ba kỹ thuật cơ bản mà mọi project manager đều dùng. Chúng không ma thuật, nhưng chúng giúp bạn sai <em>thông minh</em> hơn.</p>
+<h3 id="1-expert-judgment--hỏi-người-hiểu-việc-hơn-mình"><a class="header" href="#1-expert-judgment--hỏi-người-hiểu-việc-hơn-mình"><strong>1. Expert Judgment – Hỏi người hiểu việc hơn mình</strong></a></h3>
+<p>Cách này giống như hỏi một người thợ lành nghề: “Anh nghĩ sửa cái này mất bao lâu?”
+Expert judgment dựa vào kinh nghiệm của những người từng làm việc tương tự trong quá khứ.</p>
+<p><strong>Khi nào dùng?</strong></p>
+<ul>
+<li>Khi dự án nhỏ hoặc chưa rõ ràng.</li>
+<li>Khi có chuyên gia nội bộ nắm rõ hệ thống.</li>
+<li>Khi bạn cần ước lượng nhanh để lập kế hoạch thô ban đầu.</li>
+</ul>
+<p><strong>Ưu điểm:</strong> nhanh, linh hoạt, phù hợp khi thông tin còn mù mờ.
+<strong>Nhược điểm:</strong> phụ thuộc chủ quan, dễ bị “lạc quan” quá mức.</p>
+<p><strong>Ví dụ:</strong>
+Bạn hỏi lập trình viên backend:</p>
+<blockquote>
+<p>“Xây API đăng nhập mất khoảng bao lâu?”
+Họ trả lời:
+“Khoảng một buổi sáng, nếu không có yêu cầu bảo mật phức tạp.”</p>
+</blockquote>
+<p>Đó chính là expert judgment — đơn giản nhưng hữu ích.</p>
+<h3 id="2-analogy--so-sánh-với-dự-án-đã-làm"><a class="header" href="#2-analogy--so-sánh-với-dự-án-đã-làm"><strong>2. Analogy – So sánh với dự án đã làm</strong></a></h3>
+<p>Analogy estimation dựa trên nguyên tắc:</p>
+<blockquote>
+<p>"Nếu hai thứ tương tự nhau, thời gian/công sức để xây dựng chúng cũng tương tự."</p>
+</blockquote>
+<p>Bạn tìm một dự án cũ có đặc điểm gần giống để làm thước đo.</p>
+<p><strong>Khi nào dùng?</strong></p>
+<ul>
+<li>Có dữ liệu lịch sử.</li>
+<li>Làm phiên bản nâng cấp, mở rộng hoặc tái triển khai.</li>
+<li>Tính năng/sản phẩm giống nhau về độ phức tạp.</li>
+</ul>
+<p><strong>Ưu điểm:</strong> thực tế, dựa trên minh chứng quá khứ.
+<strong>Nhược điểm:</strong> yêu cầu dữ liệu; dễ bị sai nếu “tưởng giống nhưng không giống”.</p>
+<p><strong>Ví dụ:</strong>
+Bạn từng phát triển app ghi chú cá nhân trong 3 tuần.
+Giờ bạn làm app to-do list, cấu trúc tương tự.
+Bạn có thể ước lượng:</p>
+<blockquote>
+<p>“Có thể mất khoảng 3–4 tuần, vì mức độ phức tạp tương đồng.”</p>
+</blockquote>
+<h3 id="3-parametric--tính-toán-bằng-công-thức"><a class="header" href="#3-parametric--tính-toán-bằng-công-thức"><strong>3. Parametric – Tính toán bằng công thức</strong></a></h3>
+<p>Parametric estimation giống như lập trình:
+Bạn tìm một đơn vị đo (ví dụ: số dòng code, số chức năng, số điểm story), xác định chi phí cho một đơn vị, rồi nhân lên.</p>
+<p>Công thức đơn giản:
+<strong>Tổng chi phí = (Kích thước công việc) × (Năng suất/chi phí mỗi đơn vị)</strong></p>
+<p><strong>Khi nào dùng?</strong></p>
+<ul>
+<li>Dự án lớn hơn, dữ liệu đo đạc rõ ràng.</li>
+<li>Tổ chức có sẵn thống kê: “1 story point ≈ 6 giờ”, “1 module trung bình mất 3 ngày”…</li>
+</ul>
+<p><strong>Ưu điểm:</strong> khách quan, dễ mở rộng.
+<strong>Nhược điểm:</strong> yêu cầu dữ liệu và giả định ổn định.</p>
+<p><strong>Ví dụ:</strong>
+Bạn biết nhóm bạn trung bình hoàn thành <strong>10 story points / tuần</strong>.
+Backlog giai đoạn đầu có <strong>50 story points</strong>.
+Vậy bạn ước lượng:</p>
+<blockquote>
+<p>“Khoảng 5 tuần.”</p>
+</blockquote>
+<h2 id="earned-value-management-Đo-xem-dự-án-đang-đi-đúng-hướng"><a class="header" href="#earned-value-management-Đo-xem-dự-án-đang-đi-đúng-hướng"><strong>Earned Value Management: Đo xem dự án đang đi đúng hướng</strong></a></h2>
+<p>EVM là cách theo dõi dự án bằng số liệu, thay vì cảm giác.
+Nó trả lời ba câu hỏi quan trọng:</p>
+<ol>
+<li><strong>Bạn đã làm được bao nhiêu?</strong></li>
+<li><strong>Bạn đã tốn bao nhiêu tiền/nguồn lực?</strong></li>
+<li><strong>Bạn đang đi nhanh hơn hay chậm hơn kế hoạch?</strong></li>
+</ol>
+<p>Năm chỉ số bạn cần biết:</p>
+<h3 id="pv--planned-value-giá-trị-theo-kế-hoạch"><a class="header" href="#pv--planned-value-giá-trị-theo-kế-hoạch"><strong>PV – Planned Value (Giá trị theo kế hoạch)</strong></a></h3>
+<p>Là lượng công việc <em>đáng lẽ</em> phải hoàn thành tại thời điểm này.
+Nó giống như nói: “Theo kế hoạch, hôm nay ta phải chạy được 10km.”</p>
+<h3 id="ev--earned-value-giá-trị-thực-tế-hoàn-thành"><a class="header" href="#ev--earned-value-giá-trị-thực-tế-hoàn-thành"><strong>EV – Earned Value (Giá trị thực tế hoàn thành)</strong></a></h3>
+<p>Là <em>giá trị</em> của phần công việc bạn đã <em>thực sự</em> hoàn thành.
+Nếu bạn lên kế hoạch hoàn thành 10 chức năng trong 2 tuần, nhưng mới xong 6 chức năng, EV phản ánh giá trị 6 chức năng đó.</p>
+<h3 id="ac--actual-cost-chi-phí-thực-tế"><a class="header" href="#ac--actual-cost-chi-phí-thực-tế"><strong>AC – Actual Cost (Chi phí thực tế)</strong></a></h3>
+<p>Là lượng chi phí/nguồn lực <em>thực sự</em> đã tiêu tốn tới thời điểm này.</p>
+<h3 id="cpi--cost-performance-index-chỉ-số-hiệu-quả-chi-phí"><a class="header" href="#cpi--cost-performance-index-chỉ-số-hiệu-quả-chi-phí"><strong>CPI – Cost Performance Index (Chỉ số hiệu quả chi phí)</strong></a></h3>
+<p>Công thức:
+<strong>CPI = EV / AC</strong></p>
+<ul>
+<li>CPI = 1 → đang tiêu đúng mức dự kiến</li>
+<li>CPI &lt; 1 → đang <em>vượt chi phí</em></li>
+<li>CPI &gt; 1 → đang <em>tiết kiệm chi phí</em></li>
+</ul>
+<h3 id="spi--schedule-performance-index-chỉ-số-tiến-độ"><a class="header" href="#spi--schedule-performance-index-chỉ-số-tiến-độ"><strong>SPI – Schedule Performance Index (Chỉ số tiến độ)</strong></a></h3>
+<p>Công thức:
+<strong>SPI = EV / PV</strong></p>
+<ul>
+<li>SPI = 1 → đúng tiến độ</li>
+<li>SPI &lt; 1 → chậm tiến độ</li>
+<li>SPI &gt; 1 → nhanh hơn kế hoạch</li>
+</ul>
+<h2 id="ví-dụ-nhỏ-nhưng-đủ-để-bạn-hiểu-rõ"><a class="header" href="#ví-dụ-nhỏ-nhưng-đủ-để-bạn-hiểu-rõ"><strong>Ví dụ nhỏ nhưng đủ để bạn hiểu rõ:</strong></a></h2>
+<p>Giả sử một dự án có kế hoạch:</p>
+<ul>
+<li>Hoàn thành 100 đơn vị công việc trong 10 ngày.</li>
+<li>Mỗi ngày hoàn thành 10 đơn vị (PV mỗi ngày).</li>
+</ul>
+<p>Đến ngày thứ 5:</p>
+<ul>
+<li>Kế hoạch: 50 đơn vị → PV = 50</li>
+<li>Thực tế: chỉ làm được 40 đơn vị → EV = 40</li>
+<li>Chi phí đã tiêu: tương đương 55 đơn vị → AC = 55</li>
+</ul>
+<p>Khi đó:</p>
+<p><strong>CPI = 40 / 55 ≈ 0.73</strong>
+→ Tốn kém hơn dự kiến.</p>
+<p><strong>SPI = 40 / 50 = 0.8</strong>
+→ Chậm tiến độ.</p>
+<p>Chỉ hai con số CPI và SPI đủ để người quản lý biết:</p>
+<ul>
+<li>dự án đang “đốt tiền nhanh hơn chạy việc”,</li>
+<li>nếu không điều chỉnh, dự án sẽ trễ.</li>
+</ul>
+<h2 id="bạn-cần-nhớ-điều-gì"><a class="header" href="#bạn-cần-nhớ-điều-gì"><strong>Bạn cần nhớ điều gì?</strong></a></h2>
+<p>Ước lượng và theo dõi chi phí trong phần mềm không phải để “đúng tuyệt đối”, mà để bạn điều khiển dự án như điều khiển một chiếc xe: nhìn đồng hồ, chỉnh tốc độ, tránh tai nạn.</p>
+<p>Ba kỹ thuật ước lượng giúp bạn <strong>lên đường đúng cách</strong>.
+EVM giúp bạn <strong>đi đúng hướng</strong>.</p>
+<p>Sự kết hợp của chúng tạo ra một nền tảng quản lý vững chắc, ngay cả cho những dự án nhỏ nhất.</p>
+<h2 id="managing-risk-nhìn-trước-những-điều-có-thể-hỏng-và-chuẩn-bị-cho-chúng"><a class="header" href="#managing-risk-nhìn-trước-những-điều-có-thể-hỏng-và-chuẩn-bị-cho-chúng"><strong>Managing Risk: Nhìn trước những điều có thể hỏng và chuẩn bị cho chúng</strong></a></h2>
+<p>Rủi ro là những thứ <em>có thể</em> xảy ra, nhưng chưa chắc sẽ xảy ra.
+Chúng giống như thời tiết xấu trong một chuyến đi xa: ta không thể điều khiển mưa, nhưng ta có thể mang áo khoác.</p>
+<p>Quản lý rủi ro không phải là đoán tương lai; nó là cách giảm bớt sự ngỡ ngàng.</p>
+<p>Có hai công cụ giúp bạn nhìn rủi ro một cách hệ thống: <strong>risk register</strong> và <strong>risk matrix</strong>.</p>
+<h2 id="1-risk-register--sổ-theo-dõi-rủi-ro"><a class="header" href="#1-risk-register--sổ-theo-dõi-rủi-ro"><strong>1. Risk Register – Sổ theo dõi rủi ro</strong></a></h2>
+<p>Risk register là một bảng ghi những rủi ro mà bạn biết, cùng với cách đối phó.
+Nó giống như một danh sách: “Nếu X xảy ra, ta làm Y.”</p>
+<p>Một risk register thường có các cột sau:</p>
+<ul>
+<li><strong>Risk ID</strong> – đánh số.</li>
+<li><strong>Description</strong> – mô tả rủi ro.</li>
+<li><strong>Likelihood</strong> – xác suất xảy ra (Low/Medium/High).</li>
+<li><strong>Impact</strong> – mức độ ảnh hưởng nếu xảy ra.</li>
+<li><strong>Owner</strong> – ai chịu trách nhiệm theo dõi.</li>
+<li><strong>Mitigation</strong> – hành động để <em>giảm xác suất</em>.</li>
+<li><strong>Contingency Plan</strong> – hành động nếu rủi ro <em>đã xảy ra</em>.</li>
+</ul>
+<p>Hãy xem một ví dụ cho dự án “Xây dựng website thương mại điện tử nhỏ”:</p>
+<div class="table-wrapper"><table><thead><tr><th>ID</th><th>Description</th><th>Likelihood</th><th>Impact</th><th>Owner</th><th>Mitigation</th><th>Contingency</th></tr></thead><tbody>
+<tr><td>R1</td><td>Khách hàng đổi yêu cầu thiết kế</td><td>High</td><td>Medium</td><td>PM</td><td>Chốt nguyên tắc thay đổi (change request)</td><td>Điều chỉnh timeline, lùi tính năng</td></tr>
+<tr><td>R2</td><td>Lập trình viên front-end nghỉ đột xuất</td><td>Medium</td><td>High</td><td>PM</td><td>Phân chia kiến thức trong nhóm</td><td>Thuê freelancer tạm thời</td></tr>
+<tr><td>R3</td><td>Server thử nghiệm quá tải</td><td>Low</td><td>High</td><td>DevOps</td><td>Thiết lập load test sớm</td><td>Nâng cấp tài nguyên tạm thời</td></tr>
+</tbody></table>
+</div>
+<p>Risk register giúp dự án luôn “tỉnh táo”. Bạn không bị động chạy theo sự cố; bạn biết trước chúng có thể ghé thăm.</p>
+<h2 id="2-risk-matrix--bản-đồ-rủi-ro"><a class="header" href="#2-risk-matrix--bản-đồ-rủi-ro"><strong>2. Risk Matrix – Bản đồ rủi ro</strong></a></h2>
+<p>Risk matrix là cách biểu diễn rủi ro trực quan bằng hai yếu tố:</p>
+<ul>
+<li><strong>Likelihood</strong> – khả năng xảy ra</li>
+<li><strong>Impact</strong> – mức độ ảnh hưởng</li>
+</ul>
+<p>Khi bạn đặt chúng lên một bảng 3x3 hoặc 5x5, bạn sẽ thấy ngay rủi ro nào cần quan tâm nhất.</p>
+<p>Một ma trận đơn giản:</p>
+<pre><code>               Impact
+            Low   Med   High
+Likelihood
+High        M     H     H
+Medium      L     M     H
+Low         L     L     M
+</code></pre>
+<p>Trong đó:</p>
+<ul>
+<li><strong>H (High)</strong> = rủi ro phải xử lý ngay</li>
+<li><strong>M (Medium)</strong> = theo dõi + giảm nhẹ</li>
+<li><strong>L (Low)</strong> = chỉ ghi nhận</li>
+</ul>
+<p><strong>Ví dụ:</strong>
+Quay lại rủi ro <strong>R1: Khách hàng đổi yêu cầu thiết kế</strong></p>
+<ul>
+<li>Likelihood: High</li>
+<li>Impact: Medium
+→ Ma trận xếp nó vào vùng <strong>H (High priority)</strong>.</li>
+</ul>
+<p><strong>Ý nghĩa:</strong>
+Bạn nên chủ động quản lý việc thay đổi yêu cầu ngay từ đầu (ví dụ: viết quy trình change request, xác định phạm vi rõ ràng).</p>
+<h2 id="3-chiến-lược-phản-ứng-với-rủi-ro"><a class="header" href="#3-chiến-lược-phản-ứng-với-rủi-ro"><strong>3. Chiến lược phản ứng với rủi ro</strong></a></h2>
+<p>Sau khi xác định rủi ro, bạn cần chọn một trong bốn chiến lược phản ứng:</p>
+<h3 id="1-avoid-tránh--loại-bỏ-rủi-ro-hoàn-toàn"><a class="header" href="#1-avoid-tránh--loại-bỏ-rủi-ro-hoàn-toàn"><strong>1. Avoid (Tránh) – Loại bỏ rủi ro hoàn toàn</strong></a></h3>
+<p>Ví dụ:
+Nếu bạn sợ khách hàng đổi yêu cầu liên tục, bạn <em>đóng băng</em> thiết kế sau một mốc cụ thể.</p>
+<h3 id="2-mitigate-giảm-nhẹ--giảm-xác-suất-hoặc-tác-động"><a class="header" href="#2-mitigate-giảm-nhẹ--giảm-xác-suất-hoặc-tác-động"><strong>2. Mitigate (Giảm nhẹ) – Giảm xác suất hoặc tác động</strong></a></h3>
+<p>Ví dụ:
+Để giảm rủi ro đồng đội nghỉ bệnh, bạn chia sẻ kiến thức và phân công backup.</p>
+<h3 id="3-transfer-chuyển-giao--Đưa-rủi-ro-cho-bên-khác"><a class="header" href="#3-transfer-chuyển-giao--Đưa-rủi-ro-cho-bên-khác"><strong>3. Transfer (Chuyển giao) – Đưa rủi ro cho bên khác</strong></a></h3>
+<p>Ví dụ:
+Thuê dịch vụ cloud để giảm rủi ro server crash.</p>
+<h3 id="4-accept-chấp-nhận--chấp-nhận-rủi-ro"><a class="header" href="#4-accept-chấp-nhận--chấp-nhận-rủi-ro"><strong>4. Accept (Chấp nhận) – Chấp nhận rủi ro</strong></a></h3>
+<p>Ví dụ:
+Chấp nhận rủi ro deadline có thể trễ 1–2 ngày trong dự án nhỏ.</p>
+<p>Điều quan trọng là: bạn không thể quản lý rủi ro bằng hi vọng. Bạn quản lý bằng hành động.</p>
+<h2 id="4-một-ví-dụ-trọn-vẹn-risk-register--risk-matrix"><a class="header" href="#4-một-ví-dụ-trọn-vẹn-risk-register--risk-matrix"><strong>4. Một ví dụ trọn vẹn: Risk Register + Risk Matrix</strong></a></h2>
+<p>Giả sử trong dự án “Hệ thống quản lý bệnh viện”, bạn có rủi ro:</p>
+<p><strong>R5 – Sai sót trong xử lý dữ liệu bệnh nhân do yêu cầu không rõ ràng</strong></p>
+<ul>
+<li>
+<p>Likelihood: Medium</p>
+</li>
+<li>
+<p>Impact: High</p>
+</li>
+<li>
+<p>Trong ma trận → xếp vào <strong>High priority</strong></p>
+</li>
+<li>
+<p>Mitigation:</p>
+<ul>
+<li>Tổ chức thêm buổi thu thập yêu cầu với bác sĩ và y tá.</li>
+<li>Làm prototype giao diện để xác nhận quy trình.</li>
+</ul>
+</li>
+<li>
+<p>Contingency:</p>
+<ul>
+<li>Lập bản ghi chỉnh sửa dữ liệu và quy trình xác minh lại.</li>
+</ul>
+</li>
+</ul>
+<p>Rủi ro này thuộc loại “đáng lo” vì nó chạm tới dữ liệu nhạy cảm. Không thứ gì trong dự án bệnh viện được phép “ước chừng”.</p>
+<h2 id="5-Điều-quan-trọng-nhất-khi-học-quản-lý-rủi-ro"><a class="header" href="#5-Điều-quan-trọng-nhất-khi-học-quản-lý-rủi-ro"><strong>5. Điều quan trọng nhất khi học quản lý rủi ro</strong></a></h2>
+<p>Rủi ro không biến mất chỉ vì bạn không nhìn vào chúng.
+Risk register và risk matrix giúp bạn đưa chúng ra ánh sáng — để bạn:</p>
+<ul>
+<li>không hoảng loạn khi chuyện xấu xảy ra,</li>
+<li>ra quyết định dựa trên lý trí,</li>
+<li>giữ cho dự án đi đúng hướng ngay cả khi gió đổi chiều.</li>
+</ul>
+<p>Quản lý rủi ro không phải là trò chơi bi quan.
+Nó là sự chuẩn bị: giống như mang ô khi bạn nhìn thấy mây đen.</p>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="chapter-6--managing-teams-and-communication"><a class="header" href="#chapter-6--managing-teams-and-communication"><strong>CHAPTER 6 – Managing Teams and Communication</strong></a></h1>
+<p>Dự án phần mềm không phải là một chiếc máy; nó là một nhóm người cố gắng làm việc cùng nhau để tạo ra một chiếc máy. Mỗi người đến với dự án từ những hoàn cảnh khác nhau, mang theo kinh nghiệm, thói quen, kỳ vọng và cả điểm yếu riêng. Đó là lý do quản lý đội nhóm không chỉ là “phân việc” mà là nghệ thuật dẫn dắt con người.</p>
+<p>Chương này giúp bạn hiểu cách một nhóm phát triển qua thời gian, cách bạn có thể xác định vai trò dựa trên điểm mạnh, và quan trọng hơn — cách giao tiếp hiệu quả trong môi trường kỹ thuật.</p>
+<h2 id="1-team-development-hành-trình-từ-xa-lạ-đến-phối-hợp"><a class="header" href="#1-team-development-hành-trình-từ-xa-lạ-đến-phối-hợp"><strong>1. Team Development: Hành trình từ xa lạ đến phối hợp</strong></a></h2>
+<p>Bruce Tuckman mô tả nhóm phát triển qua bốn giai đoạn: <strong>Forming → Storming → Norming → Performing</strong>.
+Không có nhóm nào nhảy thẳng vào performing cả — dù bạn có tuyển toàn thiên tài.</p>
+<h3 id="forming--giai-đoạn-làm-quen"><a class="header" href="#forming--giai-đoạn-làm-quen"><strong>Forming – Giai đoạn làm quen</strong></a></h3>
+<p>Nhóm mới gặp nhau.
+Mọi người lịch sự, hơi dè chừng, cố gắng tỏ ra “ổn”.</p>
+<p><strong>Dấu hiệu:</strong></p>
+<ul>
+<li>ai cũng nói: “Để mình xem thử…”,</li>
+<li>chưa ai muốn tranh luận mạnh,</li>
+<li>ai cũng chờ người khác chủ động.</li>
+</ul>
+<p><strong>Vai trò của PM hoặc người dẫn dắt:</strong></p>
+<ul>
+<li>giới thiệu mục tiêu rõ ràng,</li>
+<li>làm cho mọi người thấy an toàn khi đặt câu hỏi,</li>
+<li>phân việc nhẹ nhàng để nhóm khởi động.</li>
+</ul>
+<h3 id="storming--giai-đoạn-mâu-thuẫn-bùng-lên"><a class="header" href="#storming--giai-đoạn-mâu-thuẫn-bùng-lên"><strong>Storming – Giai đoạn mâu thuẫn bùng lên</strong></a></h3>
+<p>Đây là giai đoạn thật sự “gập ghềnh”:
+con người khác biệt → va chạm xảy ra → xung đột xuất hiện.</p>
+<p><strong>Dấu hiệu:</strong></p>
+<ul>
+<li>bất đồng ý kiến về cách làm,</li>
+<li>căng thẳng khi ai đó không hoàn thành phần việc,</li>
+<li>có xu hướng đổ lỗi hoặc phòng thủ.</li>
+</ul>
+<p><strong>Vai trò của PM:</strong></p>
+<ul>
+<li>làm rõ kỳ vọng,</li>
+<li>khuyến khích thảo luận nhưng giữ tôn trọng,</li>
+<li>xử lý xung đột sớm thay vì để nó âm ỉ.</li>
+</ul>
+<p>Giai đoạn này không xấu — nó là điều kiện để nhóm thật sự hiểu nhau.</p>
+<h3 id="norming--giai-đoạn-ổn-định"><a class="header" href="#norming--giai-đoạn-ổn-định"><strong>Norming – Giai đoạn ổn định</strong></a></h3>
+<p>Mọi người bắt đầu hiểu nhau, tôn trọng nhau hơn và hình thành chuẩn mực.</p>
+<p><strong>Dấu hiệu:</strong></p>
+<ul>
+<li>vai trò rõ ràng,</li>
+<li>mọi người chủ động hỗ trợ nhau,</li>
+<li>xung đột giảm mạnh.</li>
+</ul>
+<p><strong>Vai trò của PM:</strong></p>
+<ul>
+<li>củng cố quy tắc làm việc,</li>
+<li>tạo cơ hội cho mọi người thảo luận giải pháp,</li>
+<li>giảm giám sát, tăng trao quyền.</li>
+</ul>
+<h3 id="performing--giai-đoạn-nhóm-mơ-ước"><a class="header" href="#performing--giai-đoạn-nhóm-mơ-ước"><strong>Performing – Giai đoạn “nhóm mơ ước”</strong></a></h3>
+<p>Đây là lúc nhóm hoạt động như một cỗ máy mượt mà.
+Năng suất cao, tự quản tốt, tin tưởng lẫn nhau.</p>
+<p><strong>Dấu hiệu:</strong></p>
+<ul>
+<li>thảo luận tập trung vào giải pháp,</li>
+<li>thành viên chủ động đề xuất cải tiến,</li>
+<li>chất lượng và tốc độ đều tốt.</li>
+</ul>
+<p><strong>Vai trò của PM:</strong></p>
+<ul>
+<li>loại bỏ chướng ngại thay vì điều khiển,</li>
+<li>duy trì động lực và ghi nhận đóng góp,</li>
+<li>đảm bảo nhóm không bị quá tải.</li>
+</ul>
+<h2 id="2-swot-analysis-tìm-vai-trò-dựa-trên-điểm-mạnh"><a class="header" href="#2-swot-analysis-tìm-vai-trò-dựa-trên-điểm-mạnh"><strong>2. SWOT Analysis: Tìm vai trò dựa trên điểm mạnh</strong></a></h2>
+<p>SWOT (Strengths – Weaknesses – Opportunities – Threats) thường dành cho doanh nghiệp, nhưng dùng cho cá nhân trong nhóm lại cực kỳ hiệu quả.</p>
+<p>Nó giúp bạn trả lời ba câu hỏi quan trọng:</p>
+<ol>
+<li>Tôi mạnh ở đâu?</li>
+<li>Tôi yếu ở đâu?</li>
+<li>Tôi phù hợp với vai trò nào nhất trong nhóm?</li>
+</ol>
+<h3 id="làm-swot-để-phân-vai"><a class="header" href="#làm-swot-để-phân-vai"><strong>Làm SWOT để phân vai</strong></a></h3>
+<p>Bạn muốn tìm vai trò tự nhiên cho từng người:</p>
+<ul>
+<li>Ai giỏi tổ chức? → giao nhiệm vụ điều phối.</li>
+<li>Ai có tư duy chi tiết? → giao nhiệm vụ kiểm thử.</li>
+<li>Ai giao tiếp tốt? → làm cầu nối giữa nhóm và khách hàng.</li>
+<li>Ai giỏi chuyên sâu kỹ thuật? → đảm nhận module cốt lõi.</li>
+</ul>
+<h3 id="ví-dụ-swot-của-một-thành-viên-kỹ-thuật"><a class="header" href="#ví-dụ-swot-của-một-thành-viên-kỹ-thuật"><strong>Ví dụ SWOT của một thành viên kỹ thuật</strong></a></h3>
+<p><strong>Strengths:</strong> logic tốt, thích tối ưu code.
+<strong>Weaknesses:</strong> ngại giao tiếp, đôi khi làm việc cá nhân quá mức.
+<strong>Opportunities:</strong> học thêm về performance tuning.
+<strong>Threats:</strong> deadline gấp khiến người này dễ “tự cô lập”.</p>
+<p><strong>Vai trò phù hợp:</strong> phụ trách backend chính + cần một người phối hợp giao tiếp với khách hàng thay.</p>
+<p>SWOT không phải nhãn dán. Nó là công cụ để hiểu nhau hơn, để phân việc hợp lý và tránh “đặt người sai chỗ”.</p>
+<h2 id="3-communication-and-motivation-sức-mạnh-của-trao-đổi-và-tinh-thần"><a class="header" href="#3-communication-and-motivation-sức-mạnh-của-trao-đổi-và-tinh-thần"><strong>3. Communication and Motivation: Sức mạnh của trao đổi và tinh thần</strong></a></h2>
+<p>Một nhóm kỹ thuật không hoạt động chỉ bằng code. Họ hoạt động bằng giao tiếp.
+Và giao tiếp trong kỹ thuật có đặc thù riêng: rõ ràng, logic, và tôn trọng thời gian của nhau.</p>
+<p>Dưới đây là những kỹ thuật hữu ích nhất khi bạn làm việc với các nhóm lập trình viên, tester hoặc chuyên gia kỹ thuật.</p>
+<h3 id="1-stand-up-meeting-gặp-ngắn-nhưng-đủ-ý"><a class="header" href="#1-stand-up-meeting-gặp-ngắn-nhưng-đủ-ý"><strong>(1) Stand-up meeting: Gặp ngắn nhưng đủ ý</strong></a></h3>
+<p>Một buổi họp 10–15 phút mỗi ngày, mỗi người chỉ trả lời ba điều:</p>
+<ul>
+<li>Hôm qua làm gì?</li>
+<li>Hôm nay sẽ làm gì?</li>
+<li>Có đang bị kẹt không?</li>
+</ul>
+<p>Stand-up không phải để báo cáo “cho đẹp”, mà để phát hiện vấn đề sớm.</p>
+<h3 id="2-communication-by-visibility-hiển-thị-trạng-thái-công-việc"><a class="header" href="#2-communication-by-visibility-hiển-thị-trạng-thái-công-việc"><strong>(2) Communication by visibility: Hiển thị trạng thái công việc</strong></a></h3>
+<p>Kỹ thuật này dựa trên nguyên tắc đơn giản:
+<em>trạng thái được nhìn thấy → công việc dễ phối hợp hơn.</em></p>
+<p>Cách làm:</p>
+<ul>
+<li>bảng Kanban,</li>
+<li>Gantt chart,</li>
+<li>ticket của Jira/Trello/Notion.</li>
+</ul>
+<p>Nhìn vào bảng, bạn biết ai đang quá tải, ai đang chờ review, ai bị kẹt — không cần suy đoán.</p>
+<h3 id="3-active-listening-lắng-nghe-đúng-cách"><a class="header" href="#3-active-listening-lắng-nghe-đúng-cách"><strong>(3) Active listening: Lắng nghe đúng cách</strong></a></h3>
+<p>Trong môi trường kỹ thuật, đôi khi vấn đề không phải ở code mà ở hiểu lầm.</p>
+<p>Active listening nghĩa là:</p>
+<ul>
+<li>không cắt ngang,</li>
+<li>hỏi lại để chắc chắn,</li>
+<li>tóm tắt những gì nghe được.</li>
+</ul>
+<p>Một câu “Để mình hiểu lại xem nhé…” giúp tránh hàng giờ tranh cãi.</p>
+<h3 id="4-motivation-không-chỉ-là-thưởng--phạt"><a class="header" href="#4-motivation-không-chỉ-là-thưởng--phạt"><strong>(4) Motivation: Không chỉ là thưởng – phạt</strong></a></h3>
+<p>Người kỹ thuật có động lực rất khác với nhân viên bán hàng hay marketing.</p>
+<p>Họ bị thúc đẩy bởi:</p>
+<ul>
+<li>được giao thử thách đúng mức,</li>
+<li>được thừa nhận,</li>
+<li>được làm việc với người giỏi,</li>
+<li>được học cái mới.</li>
+</ul>
+<p>Động lực không phải chuyện cảm xúc; nó là chuyện môi trường.
+Bạn tạo môi trường tốt → nhóm tự động mạnh lên.</p>
+<h3 id="5-phản-hồi-đúng-cách-feedback-loops"><a class="header" href="#5-phản-hồi-đúng-cách-feedback-loops"><strong>(5) Phản hồi đúng cách (Feedback loops)</strong></a></h3>
+<p>Phản hồi có hai loại:</p>
+<ul>
+<li><strong>Phản hồi công việc</strong>: “Phần này cần sửa vì ảnh hưởng X.”</li>
+<li><strong>Phản hồi hành vi</strong>: “Khi bạn trả lời ngắn quá, mọi người khó hiểu.”</li>
+</ul>
+<p>Một phản hồi hiệu quả có ba tính chất:</p>
+<ol>
+<li>Cụ thể.</li>
+<li>Tập trung vào hành động, không công kích cá nhân.</li>
+<li>Đưa ra càng sớm càng tốt.</li>
+</ol>
+<p>Phản hồi muộn giống như cảnh báo sớm khi tàu đã sắp chìm.</p>
+<h2 id="tổng-kết-cho-chương-này"><a class="header" href="#tổng-kết-cho-chương-này"><strong>Tổng kết cho chương này</strong></a></h2>
+<p>Làm việc nhóm không phải là chuyện “mọi người giỏi như nhau” mà là chuyện “mọi người kết hợp đúng cách”.</p>
+<ul>
+<li>Tuckman giúp bạn hiểu nhóm thay đổi ra sao theo thời gian.</li>
+<li>SWOT giúp bạn đặt đúng người vào đúng chỗ.</li>
+<li>Giao tiếp và động viên giúp nhóm duy trì được sự bền bỉ và tinh thần tích cực.</li>
+</ul>
+<p>Dự án phần mềm chỉ chạy mượt khi nhóm chạy mượt — và nhóm chạy mượt khi họ hiểu nhau và được hỗ trợ đúng lúc.</p>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="chapter-7--ensuring-quality"><a class="header" href="#chapter-7--ensuring-quality"><strong>CHAPTER 7 – Ensuring Quality</strong></a></h1>
+<p>Phần mềm tốt không chỉ là phần mềm “chạy được”. Nó là thứ khiến người dùng muốn quay lại, khiến đội ngũ phát triển muốn bảo trì, và khiến khách hàng cảm thấy an tâm. Chất lượng là những gì còn lại khi hào quang tính năng đã lùi xuống.</p>
+<p>Chương này giúp bạn nhìn chất lượng dưới ba góc:</p>
+<ol>
+<li>định nghĩa và các thuộc tính,</li>
+<li>sự khác biệt giữa QA và QC,</li>
+<li>cách chất lượng gắn liền với toàn bộ quy trình phát triển.</li>
+</ol>
+<h2 id="1-what-is-software-quality--chất-lượng-là-đáp-ứng-kỳ-vọng-một-cách-nhất-quán"><a class="header" href="#1-what-is-software-quality--chất-lượng-là-đáp-ứng-kỳ-vọng-một-cách-nhất-quán"><strong>1. What Is Software Quality? – Chất lượng là đáp ứng kỳ vọng một cách nhất quán</strong></a></h2>
+<p>Một định nghĩa đơn giản và đáng tin cậy:</p>
+<p><strong>“Chất lượng phần mềm là mức độ mà sản phẩm đáp ứng yêu cầu đã đặt ra — cả yêu cầu chức năng lẫn yêu cầu phi chức năng — một cách đáng tin cậy, dễ sử dụng và dễ phát triển tiếp.”</strong></p>
+<p>Không phải chỉ chạy đúng.
+Không phải chỉ giao đúng hạn.
+Chất lượng là trải nghiệm tổng thể.</p>
+<p>Để hiểu chất lượng, bạn cần làm quen với hệ các thuộc tính phổ biến trong phần mềm.</p>
+<h2 id="2-quality-attributes--những-thuộc-tính-làm-nên-chất-lượng"><a class="header" href="#2-quality-attributes--những-thuộc-tính-làm-nên-chất-lượng"><strong>2. Quality Attributes – Những thuộc tính làm nên chất lượng</strong></a></h2>
+<p>Mỗi thuộc tính dưới đây giống như một khía cạnh của con người: không ai hoàn hảo ở tất cả, nhưng một sản phẩm tốt phải cân bằng hợp lý.</p>
+<h3 id="reliability--Độ-tin-cậy"><a class="header" href="#reliability--Độ-tin-cậy"><strong>Reliability – Độ tin cậy</strong></a></h3>
+<p>Phần mềm có thể hoạt động ổn định không?
+Có crash mỗi khi nhập ký tự lạ hay không?
+Người dùng càng ít bất ngờ xấu, phần mềm càng đáng tin.</p>
+<p>Ví dụ: ứng dụng ngân hàng <em>không được phép</em> sập vào giờ cao điểm.</p>
+<h3 id="usability--tính-dễ-sử-dụng"><a class="header" href="#usability--tính-dễ-sử-dụng"><strong>Usability – Tính dễ sử dụng</strong></a></h3>
+<p>Người dùng có cần đọc hướng dẫn 20 phút để hiểu cách bấm nút không?
+Giao diện có rõ ràng không?
+Tác vụ phổ biến có dễ tìm không?</p>
+<p>Một phần mềm chất lượng là phần mềm <em>không khiến người dùng suy nghĩ quá nhiều</em>.</p>
+<h3 id="maintainability--khả-năng-bảo-trì"><a class="header" href="#maintainability--khả-năng-bảo-trì"><strong>Maintainability – Khả năng bảo trì</strong></a></h3>
+<p>Code có dễ đọc, dễ sửa, dễ mở rộng không?
+Một nhóm mới có thể tiếp quản dự án mà không phải “đập đi làm lại” không?</p>
+<p>Maintainability là thứ quyết định tuổi thọ của dự án.</p>
+<h3 id="efficiency--hiệu-năng"><a class="header" href="#efficiency--hiệu-năng"><strong>Efficiency – Hiệu năng</strong></a></h3>
+<p>Phần mềm có dùng CPU/RAM hợp lý không?
+Thời gian phản hồi có nhanh không?</p>
+<p>Một app chậm là một app người dùng sớm rời bỏ.</p>
+<h3 id="security--bảo-mật"><a class="header" href="#security--bảo-mật"><strong>Security – Bảo mật</strong></a></h3>
+<p>Có dễ bị tấn công không?
+Dữ liệu người dùng có an toàn không?</p>
+<p>Đặc biệt quan trọng trong các lĩnh vực y tế, tài chính, giáo dục.</p>
+<h3 id="testability-portability-robustness"><a class="header" href="#testability-portability-robustness"><strong>Testability, Portability, Robustness…</strong></a></h3>
+<ul>
+<li><strong>Testability</strong>: dễ kiểm thử không?</li>
+<li><strong>Portability</strong>: chạy được trên nhiều môi trường không?</li>
+<li><strong>Robustness</strong>: chịu lỗi tốt không?</li>
+</ul>
+<p>Không phải dự án nào cũng cần đầy đủ tất cả, nhưng mỗi dự án đều cần chọn một số yếu tố cốt lõi rồi tối ưu chúng.</p>
+<h2 id="3-qa-vs-qc--hai-khái-niệm-giống-nhau-ở-tên-nhưng-khác-nhau-ở-bản-chất"><a class="header" href="#3-qa-vs-qc--hai-khái-niệm-giống-nhau-ở-tên-nhưng-khác-nhau-ở-bản-chất"><strong>3. QA vs QC – Hai khái niệm giống nhau ở tên, nhưng khác nhau ở bản chất</strong></a></h2>
+<p>Đây là điểm dễ gây nhầm lẫn.</p>
+<h3 id="quality-assurance-qa--Đảm-bảo-chất-lượng"><a class="header" href="#quality-assurance-qa--Đảm-bảo-chất-lượng"><strong>Quality Assurance (QA) – Đảm bảo chất lượng</strong></a></h3>
+<p>QA tập trung vào <strong>quy trình</strong>.
+Nó hỏi: <em>Chúng ta có làm đúng cách hay không?</em></p>
+<p>QA là chủ động:</p>
+<ul>
+<li>xây dựng quy trình,</li>
+<li>đặt chuẩn code,</li>
+<li>quy định review,</li>
+<li>thiết lập checklist.</li>
+</ul>
+<p>QA giúp phòng ngừa lỗi trước khi chúng xuất hiện.</p>
+<h3 id="quality-control-qc--kiểm-soát-chất-lượng"><a class="header" href="#quality-control-qc--kiểm-soát-chất-lượng"><strong>Quality Control (QC) – Kiểm soát chất lượng</strong></a></h3>
+<p>QC tập trung vào <strong>sản phẩm</strong>.
+Nó hỏi: <em>Thứ chúng ta làm ra có lỗi hay không?</em></p>
+<p>QC là phản ứng:</p>
+<ul>
+<li>kiểm thử,</li>
+<li>tìm bug,</li>
+<li>so sánh với yêu cầu.</li>
+</ul>
+<p>QC xuất hiện <em>sau</em> khi code đã được viết.</p>
+<p>Nếu hình dung bằng ẩn dụ:</p>
+<ul>
+<li><strong>QA</strong> là cách bạn dạy đầu bếp rửa tay và kiểm tra nguyên liệu.</li>
+<li><strong>QC</strong> là cách bạn nếm món ăn trước khi mang ra cho khách.</li>
+</ul>
+<p>QA hướng vào phòng ngừa.
+QC hướng vào phát hiện.</p>
+<p>Một dự án chất lượng cần <strong>cả hai</strong>.</p>
+<h2 id="4-the-link-between-development-and-quality--quy-trình-tốt-tạo-ra-sản-phẩm-tốt"><a class="header" href="#4-the-link-between-development-and-quality--quy-trình-tốt-tạo-ra-sản-phẩm-tốt"><strong>4. The Link Between Development and Quality – Quy trình tốt tạo ra sản phẩm tốt</strong></a></h2>
+<p>Chất lượng không đến ở cuối dự án; nó được gieo từ ngay lúc bắt đầu.
+Quy trình phát triển và quy trình đảm bảo chất lượng không phải hai đường song song — chúng giao nhau ở mọi điểm.</p>
+<h3 id="1-trong-giai-đoạn-phân-tích-yêu-cầu"><a class="header" href="#1-trong-giai-đoạn-phân-tích-yêu-cầu"><strong>(1) Trong giai đoạn phân tích yêu cầu</strong></a></h3>
+<ul>
+<li>QA đảm bảo yêu cầu rõ ràng, không mơ hồ.</li>
+<li>Nếu yêu cầu sai → mọi thứ phía sau cũng sai.
+Chất lượng bắt đầu từ việc… nghe khách hàng.</li>
+</ul>
+<h3 id="2-trong-giai-đoạn-thiết-kế"><a class="header" href="#2-trong-giai-đoạn-thiết-kế"><strong>(2) Trong giai đoạn thiết kế</strong></a></h3>
+<ul>
+<li>QA đề xuất tiêu chuẩn giao diện, cấu trúc module.</li>
+<li>Các quyết định thiết kế ảnh hưởng trực tiếp đến hiệu năng, bảo trì và độ tin cậy.</li>
+</ul>
+<p>Thiết kế tốt → sản phẩm ổn định hơn → ít bug hơn.</p>
+<h3 id="3-trong-giai-đoạn-lập-trình"><a class="header" href="#3-trong-giai-đoạn-lập-trình"><strong>(3) Trong giai đoạn lập trình</strong></a></h3>
+<ul>
+<li>QA quy định coding conventions.</li>
+<li>QC kiểm thử đơn vị, kiểm thử tích hợp.</li>
+<li>Review code làm tăng maintainability và giảm lỗi từ sớm.</li>
+</ul>
+<h3 id="4-trong-giai-đoạn-kiểm-thử"><a class="header" href="#4-trong-giai-đoạn-kiểm-thử"><strong>(4) Trong giai đoạn kiểm thử</strong></a></h3>
+<ul>
+<li>QC phát hiện lỗi.</li>
+<li>QA đảm bảo quy trình kiểm thử đủ mạnh để không bỏ sót lỗi quan trọng.</li>
+</ul>
+<h3 id="5-trong-triển-khai-và-vận-hành"><a class="header" href="#5-trong-triển-khai-và-vận-hành"><strong>(5) Trong triển khai và vận hành</strong></a></h3>
+<ul>
+<li>QA đảm bảo có hướng dẫn, checklist triển khai, logging, monitoring.</li>
+<li>QC kiểm tra build cuối cùng.</li>
+</ul>
+<p>Chất lượng không kết thúc khi sản phẩm ra mắt. Nó sống cùng sản phẩm.</p>
+<h2 id="5-tóm-lại-chất-lượng-không-phải-giai-đoạn--nó-là-một-thái-độ"><a class="header" href="#5-tóm-lại-chất-lượng-không-phải-giai-đoạn--nó-là-một-thái-độ"><strong>5. Tóm lại: Chất lượng không phải giai đoạn — nó là một thái độ</strong></a></h2>
+<p>Một project manager giỏi không chỉ hỏi:</p>
+<ul>
+<li>“Chúng ta làm được chưa?”
+mà còn hỏi:</li>
+<li>“Chúng ta đã làm <em>đúng</em> chưa?”</li>
+<li>“Người dùng có cảm thấy thoải mái không?”</li>
+<li>“Chúng ta có thể phát triển nhanh hơn ở phiên bản sau không?”</li>
+</ul>
+<p>Chất lượng là chuyện của cả nhóm, không chỉ của tester.
+Nó là cách bạn thiết kế quy trình, cách bạn viết code, cách bạn giao tiếp, và cách bạn nhìn về sản phẩm dài hạn.</p>
+<div style="break-before: page; page-break-before: always;"></div><div style="break-before: page; page-break-before: always;"></div><h1 id="Áp-dụng-gantt-chart"><a class="header" href="#Áp-dụng-gantt-chart">Áp dụng Gantt chart</a></h1>
+<p>(Nguồn: https://viblo.asia/p/ap-dung-gantt-chart-trong-quan-li-thoi-gian-hieu-qua-WApGx32oM06y)</p>
+<p><strong>Hãy suy nghĩ về một thách thức: Bạn phải sắp xếp một chục quả bóng cùng một lúc. Bạn sẽ phải để mắt đến tất cả quả bóng, và phải biết khi nào bắt được quả nào. Nếu bạn bị nhầm lẫn dù là chỉ một, có thể sẽ làm hỏng toàn bộ hiệu suất của bạn.</strong></p>
+<p><img src="https://images.viblo.asia/e10e33fd-0eb4-4f9b-b22a-69eb4f666f6e.jpg" alt="canstockphoto13085820.jpg" /></p>
+<p>Quản lí một dự án cũng giống như vậy. Để hoàn thành thành công một dự án, bạn phải kiểm soát một số lượng lớn các hoạt động, và đảm bảo rằng chúng được hoàn thành đúng tiến độ. Nếu bạn bỏ lỡ một hạn deadline, hoặc kết thúc một task không theo đúng thứ tự, nó có để làm đảo lộn toàn bộ dự án. Kết quả có thể sẽ dẫn đến dự án hoàn thành muộn hơn, và tốn nhiều chi phí hơn.</p>
+<p>Gantt charts là công cụ có khả năng truyền đạt thông tin trực quan. Charts này sẽ vạch ra tất cả các task lớn và task nhỏ thuộc dự án, thời gian và thứ tự thực hiện chúng. Điều này cung cấp cho người quản lý một cái nhìn tổng quan ngay lập tức về dự án, các task liên quan, và thời điểm mỗi task phải được hoàn thành.</p>
+<p>Trong bài viết này, hãy cùng xem xét lý do tại sao Gantt Charts lại hữu ích đến vậy, và làm thế nào để áp dụng Gantt Charts vào quản lý dự án của chúng ta một cách hiệu quả, cũng như trong quản lý thời gian cá nhân.</p>
+<p><strong>Khởi điểm của Gantt Chart</strong></p>
+<p>Vào cuối những năm 1800s, kỹ sư Ba Lan Karol Adamiecki đã phát triển một biểu đồ luồng công việc trực quan mà ông gọi là "harmonogram."</p>
+<p>Vào khoảng năm 1910, Henry Gantt, một nhà tư vấn quản lý, kỹ sư, đã phát triển khái niệm của Adamiecki thành giai đoạn tiếp theo. Biểu đồ của ông được thiết kế để giúp giám sát sản xuất xem liệu công việc của họ đã được thực hiện đúng, trước, hay là chậm tiến độ, và biểu đồ này đã hình thành nền tảng của các công cụ chúng ta sử dụng ngày nay.</p>
+<p><strong>Tại sao sử dụng Gantt Charts?</strong></p>
+<p>Khi bạn thiết lập một biểu đồ Gantt, bạn cần phải suy nghĩ qua tất cả các nhiệm vụ liên quan trong dự án của bạn. Và bên cạnh đó, bạn sẽ làm việc ra những người sẽ chịu trách nhiệm cho từng nhiệm vụ, mỗi nhiệm vụ sẽ mất bao lâu, và những vấn đề mà của bạn có thể gặp phải.</p>
+<p>Suy nghĩ về các chi tiết này nhằm 2 mục đích: 1. đảm bảo rằng lịch trình đặt ra cho dự án là hoàn toàn khả thi, giao việc cho đúng người, và 2. Suy nghĩ về cách giải quyết cho vấn đề tiềm tàng trước khi bắt đầu.</p>
+<p>Ngoài ra, suy tính trước về các bước nằm trên lịch trình của dự án cũng giúp nhà quản lý ước tính trước các khía cạnh thực tế của một dự án, chẳng hạn như Thời gian tối thiểu để hoàn thành 1 task, task nào phải được hoàn thành trước task nào. Thêm nữa, bạn có thể sử dụng các điểm này để xác định Critical Path - chuỗi các task cần được hoàn thành đúng hạn để toàn bộ dự án kết thúc trong thời gian ngắn nhất.</p>
+<p>Cuối cùng, Gantt charts có thể cho người quản lý, khách hàng và những người tham gia vào dự án thấy tiến độ hiện tại của dự án. Đơn giản chỉ cần cập nhật các thay đổi về trạng thái của tasks trên biểu đồ, và tác động của chúng đến tiến độ dự án, thông qua việc hoàn thành các nhiệm vụ trọng tâm thuộc về Critical Path.</p>
+<p><strong>Tạo một Gantt Chart</strong></p>
+<p>Bạn có thể thấy một ví dụ về Gantt Chart trong hình bên dưới:</p>
+<p><img src="https://images.viblo.asia/d2c22e9b-403b-4213-aad5-f0e4657c4cc6.jpg" alt="Gantt-Chart-Diagram-Figure-1.jpg" /></p>
+<p>Để tạo một bảng như vậy cho dự án của bạn, hãy làm theo các bước sau:</p>
+<p><strong><em>Bước 1: Xác định các tasks thiết yếu</em></strong></p>
+<p>Ví dụ bạn muốn tạo một kế hoạch học tập cá nhân. Nên nhớ là Gantt chart không cung cấp bất kỳ thông tin hữu ích trừ phi nó bao gồm tất cả các task cần thiết cho mọi giai đoạn của dự án.</p>
+<p>Vì vậy, để bắt đầu, hãy liệt kê tất cả các tasks cần thiết cho kế hoạch này. Sử dụng một Work Breakdown Structure (Cấu trúc phân chia công việc) để xây dựng các hoạt động/task cụ thể mà dự án cần. Đối với mỗi task, hãy lưu ý về ngày bắt đầu sớm nhất (earliest start day) và thời gian ước tính (estimated duration) của nó của task để dự án đúng tiến độ.</p>
+<p>Ví dụ:</p>
+<p>Công ty của bạn đã thắng thầu một dự án để tạo ra một sản phẩm mới "Phần mềm dịch vụ", và bạn đang phụ trách dự án này.</p>
+<p>Bạn quyết định sử dụng biểu đồ Gantt để tổ chức tất cả các nhiệm vụ cần thiết, và để tính toán khoảng thời gian tổng thể có khả năng để dự án hoàn thành.</p>
+<p>Bạn hãy bắt đầu bằng việc liệt kê tất cả các hoạt động sẽ phải diễn ra, và ước tính bao lâu mỗi task cần để hoàn thành. Danh sách của bạn sẽ được liệt kê như sau:</p>
+<p><img src="https://images.viblo.asia/e8b60f23-50d7-460d-9104-1bc01887c749.jpg" alt="bảng 1.jpg" /></p>
+<p><strong><em>Bước 2: Xác định quan hệ của các task</em></strong></p>
+<p>Một trong những công năng của Gantt chart là nó cho thấy mối quan hệ giữa các task trong một dự án, task nào phải hoàn thành trước thì task sau mới có thể bắt đầu kế tiếp, và cũng cho biết là task được phân công cho anh A chỉ có thể bắt đầu khi task B của anh nào kết thúc.</p>
+<p>Những hoạt động phụ thuộc vào task khác này được gọi là nhiệm vj "tuần tự" hoặc nhiệm vụ "tuyến tính".</p>
+<p>Còn các nhiệm vụ khác được thực hiện "song song" - nghĩa là chúng có thể được thực hiện tại cùng một thời gian với một hoặc nhiều nhiệm vụ khác.</p>
+<p>Khi chúng ta đã liệt kê được tất cả các tasks trong dự án, chúng ta sẽ thấy là chúng không nhất thiết phải được thực hiện tuần tự hết task này mới đến task khác. Tuy nhiên, có một số task phải được hoàn thành thì mới tạo điều kiện cho task thứ 2 triển khai. Ví dụ, bạn đang tạo một tấm thiệp mời, bạn cần phải hoàn thành việc thiết kế trước khi bạn có thể gửi nó đi in, nghĩa là, điều kiện cần để bắt đầu task “In thiệp mời” là bạn phải hoàn thành xong task “Thiết kế thiệp”, tuy nhiên, một số task khác hoàn toàn có thể làm song song ví dụ như “Chuẩn bị tài liệu in”.</p>
+<p>Hãy xác định task nào trong dự án của bạn là song song hay tuần tự. Trường hợp có task phụ thuộc vào người khác, ghi lại mối quan hệ giữa người đó và task. Điều này sẽ cung cấp cho bạn một sự hiểu biết sâu sắc hơn về làm thế nào để tổ chức dự án, và sẽ giúp bạn bắt đầu lập kế hoạch cho các task trên bảng xếp hạng.</p>
+<pre><code>Chú thích:
+
+Trong biểu đồ Gantt, có ba mối quan hệ cơ bản giữa các task tuần tự:
+
+Finish to Start (FS) - task FS không thể bắt đầu trước khi nhiệm vụ (có liên quan) trước đó kết thúc. Tuy nhiên, nó không nhất thiết phải bắt đầu ngay tại thời điểm của task trước đó.
+
+Start to Start (SS) - task SS không thể bắt đầu cho đến khi một task khác bắt đầu. Tuy nhiên, nó có thể bắt đầu sau.
+
+Finish to Finish (FF) - task FF không thể kết thúc trước khi một task khác kết thúc. Tuy nhiên, nó có thể kết thúc muộn hơn task đó.
+
+Ngoài ra có 1 loại thứ 4, Start to Finish (SF), tuy nhiên rất hiếm gặp.
+</code></pre>
+<p><img src="https://images.viblo.asia/116a8f7f-e065-4e48-ba7e-ba8221f93f0f.jpg" alt="bảng 2.jpg" /></p>
+<pre><code>Mẹo 1:
+
+Nhiệm vụ tuần tự và song song có thể bắt đầu cùng một lúc - ví dụ, hai task (B và D) có thể phụ thuộc vào cùng 1 task (A), và có thể được hoàn thành cùng một lúc. Nhiệm vụ B là tuần tự đối với task A, vì nó chỉ có thể bắt đầu sau khi A kết thúc, và nó là task song song đối với D.
+
+Mẹo 2:
+
+Để giảm thiểu thời gian thực hiện toàn dự án, bạn sẽ cần phải thực hiện nhiều task song song càng tốt. Và bạn cũng cần phải giữ kích thước của dự án ở mức nhỏ nhất có thể, tránh đi quá xa với các dự tính ban đầu. Dự án càng đơn giản càng dễ thực hiện và hoàn thành.
+</code></pre>
+<p><strong><em>Bước 3: Nhập các tasks vào phần mềm hoặc một template</em></strong></p>
+<p>Bạn có thể vẽ biểu đồ của bạn bằng tay hoặc sử dụng các phần mềm chuyên nghiệp, chẳng hạn như Gantto, Matchware, Tom’s Planner hoặc Microsoft Project. Một số các công cụ này được tạo dưới dạng chia sẻ, bạn và nhóm của bạn có thể truy cập tài liệu này cùng một lúc, từ bất kỳ địa điểm nào. (Điều này sẽ giúp ích nhiều khi bạn đang thảo luận, muốn tìm cách để tối ưu hóa, hay khi báo cáo về dự án)</p>
+<p>Một số template Excel đã được tạo cho Gantt chart, và bạn cũng có thể tìm thấy các mẫu miễn phí với qua Google search.</p>
+<p>Sau đây là Gantt Chart đã được tạo cho dự án ví dụ trên:</p>
+<p><img src="https://images.viblo.asia/adfb343c-9a9e-47de-8feb-3cd1c41e0e1a.jpg" alt="Gantt-Chart-Diagram-Figure-2.jpg" /></p>
+<p><strong><em>Bước 4: Cập nhật tiến độ dự án trên biểu đồ</em></strong></p>
+<p>Theo thời gian, khi dự án của bạn tiến hành, nó sẽ phát triển ra nhiều khả năng. Ví dụ, trong trường hợp ví dụ nêu trên, nếu (H) Đảm bảo chất lượng của các mô-đun chính xảy ra một vấn đề, người phụ trách task này sẽ cần nhiều thời gian hơn để hoàn thành task, vì thế task (J) Training cơ bản cho khách hàng có thể cần phải trì hoãn, và cũng sẽ ảnh hưởng đến việc bắt đầu task (M) Phát triển của hệ thống quản lý thông tin cho đến khi vấn đề được giải quyết.</p>
+<p>Là người quản lý dự án, bạn cần cập nhật biểu đồ lập tức để phản ánh thay đổi ngay khi chúng xảy ra. Điều này sẽ giúp bạn có những điều chỉnh kịp thời để giữ cho các kế hoạch được đúng tiến độ, và thông tin kịp thời đến khách hàng của bạn.</p>
+<p><strong>Tổng kết</strong></p>
+<p>Biểu đồ Gantt khá hữu ích cho việc quy hoạch và lập kế hoạch cho các dự án. Nó giúp bạn đánh giá bao lâu để hoàn thành một dự án, xác định các nguồn lực cần thiết, và có kế hoạch thứ tự để hoàn thành nhiệm vụ. Nó cũng giúp ích cho việc quản lý mối quan hệ giữa các tasks.</p>
+<p>Ngoài ra, ích lợi thứ 2 mà Gantt chart mang lại là một công cụ để theo dõi tiến độ của dự án khi nó đang được tiến hành. Bạn có thể thấy ngay những gì nên đạt được vào tại một thời điểm xác thực, và nếu dự án chậm tiến độ, bạn có thể có hành động để đưa nó trở lại với kế hoạch.</p>
+<p>Một ứng dụng khác của Gantt chart là trong công việc và cuộc sống của chúng ta. Những dự định, công việc cần hoàn thành là những task cá nhân cụ thể, và bạn hoàn toàn có thể quản lý chúng dưới dạng Gantt chart. Những task này hiển nhiên đơn giản hơn rất nhiều so với những task phức tạp, nhỏ lẻ, loằng ngoằng trong một dự án, và như đã nói ở phần Mẹo 2 ở trên, dự án càng đơn giản càng dễ thực hiện và hoàn thành. Chúc bạn thành công trong việc sử dụng Gantt chart để quản lý thời gian cá nhân nhé!</p>
+<p><em>Tham khảo và dịch từ nguồn: <a href="https://www.mindtools.com/pages/article/newPPM_03.htm">https://www.mindtools.com/pages/article/newPPM_03.htm</a></em></p>
+<div style="break-before: page; page-break-before: always;"></div><div style="break-before: page; page-break-before: always;"></div><div style="break-before: page; page-break-before: always;"></div><h1 id="wbs"><a class="header" href="#wbs">WBS</a></h1>
+<p>(Nguồn: https://viblo.asia/p/breakdown-structure-cau-truc-phan-chia-cac-thanh-phan-du-an-aWj538owK6m)</p>
+<p>Tuần vừa rồi mình vừa bị dí cho làm một file <code>WBS</code> các bạn ạ. Với một thằng thấy mình hợp với phong cách Agile như mình thì đúng là một thử thách mới chứ chẳng phải chơi. Tìm hiểu cách làm sao để làm được <code>WBS</code> chuẩn, xong rồi lại phải tìm hiểu cách dùng <code>Microsoft Project</code> để tạo file nữa. Lâu rồi không dùng win xong lại phải dùng một phần mềm mới để tạo ra một thể loại tài liệu cũng mới nữa nên là cũng căng phết. May sao khách hàng cũng ưng cái bụng. =))</p>
+<p>Sau khi tìm hiểu xong về <code>WBS</code> thì mình cũng thấy nó khá là thú vị, thực ra nó được ứng dụng trong hầu hết các dự án thực trong đời sống. Mặc dù vai trò của nó lớn hơn với mô hình <code>Thác nước</code> (<code>Waterfall</code>), tuy nhiên thực ra trong các mô hình của <code>Agile</code> nó cũng có vai trò rất quan trọng khi <code>Project Owner</code> phân tích dự án và phân chia các task.</p>
+<p><code>WBS</code> là viết tắt của <code>Work Breakdown Structure</code>. Tạm dịch là <code>CẤU TRÚC PHÂN CHIA CÔNG VIỆC</code>. Điều này dẫn tới cho mình một thắc mắc là rõ ràng trong dự án có rất nhiều yếu tố phải để ý tới sau khi đã có sự phân chia công việc. Đó là cơ cấu tổ chức của team, chi phí thế nào, rủi ro ra sao...vv. Tất cả những nội dung ấy đều cần phải phân chia rõ ràng để phân tích. Vậy ngoài <code>WBS</code> thì có những cấu trúc phân chia nào khác mà các <code>"sếp"</code> sẽ dùng sau khi nhận được file <code>WBS</code> mình đã nộp? (hihi)</p>
+<p>Nào chúng ta hãy cùng nghía qua các cấu trúc phân chia đó trong ngày hôm nay nhé!</p>
+<h2 id="i-Định-nghĩa-breakdown-structure"><a class="header" href="#i-Định-nghĩa-breakdown-structure">I. Định nghĩa Breakdown Structure</a></h2>
+<p><code>Breakdown Structure</code> hay cấu trúc phân chia, vốn có nguồn gốc từ cuộc cách mạng công nghiệp, là cốt lõi của nghiệp vụ quản lý dự án. Khoa học quản lý tập trung vào các mối quan hệ giữa người lao động và máy móc, từ đó giả định năng suất có thể được tăng lên bằng cách tăng hiệu quả của các quá trình sản xuất. Cách tiếp cận <code>giản lược</code> với các vấn đề phức tạp, cùng với sự phân chia lao động chính là trọng tâm của khoa học quản lý cũng như nhiều quy trình quản lý dự án hiện đại được xây dựng xung quanh <code>cấu trúc phân chia</code>.</p>
+<p>8 cấu trúc phân chia hay được sử dụng ngày nay gồm có:</p>
+<ul>
+<li>WBS (Work Breakdown Structure)</li>
+<li>OBS (Organizational Breakdown Structure)</li>
+<li>CBS (Cost Breakdown Structure)</li>
+<li>RBS (Resource Breakdown Structure)</li>
+<li>PBS (Product Breakdown Structure)</li>
+<li>BoM (Bill of Materials)</li>
+<li>RBS (Risk Breakdown Structure)</li>
+<li>CBS (Contract Breakdown Structure)</li>
+</ul>
+<h2 id="ii-Định-nghĩa-các-cấu-trúc-phân-chia-hay-dùng"><a class="header" href="#ii-Định-nghĩa-các-cấu-trúc-phân-chia-hay-dùng">II. Định nghĩa các cấu trúc phân chia hay dùng</a></h2>
+<h2 id="1-wbs-work-breakdown-structure---cấu-trúc-phân-chia-công-việc"><a class="header" href="#1-wbs-work-breakdown-structure---cấu-trúc-phân-chia-công-việc">1. WBS (Work Breakdown Structure) - Cấu trúc phân chia công việc</a></h2>
+<p><code>Cấu trúc phân chia công việc</code> là một công cụ được sử dụng để xác định và nhóm các yếu tố công việc của một dự án riêng biệt theo một cách sẽ giúp sắp xếp và xác định phạm vi công việc tổng thể của dự án này. Nó cung cấp một khung tham chiếu cho việc dự toán và kiểm soát chi phí chi tiết và cung cấp một hướng dẫn cho việc lên kế hoạch phát triển và quản lý. Chính vì vậy mà thường là khách hàng hay sếp của bạn sẽ "đòi hỏi" nó đầu tiên (yaoming)</p>
+<h2 id="2-obs-organizational-breakdown-structure---cấu-trúc-phân-chia-cơ-cấu-tổ-chức"><a class="header" href="#2-obs-organizational-breakdown-structure---cấu-trúc-phân-chia-cơ-cấu-tổ-chức">2. OBS (Organizational Breakdown Structure) - Cấu trúc phân chia cơ cấu tổ chức</a></h2>
+<p>Đến đây các bạn đã thấy quen chưa ạ? Đầu tiên là sếp đòi <code>WBS</code>, sau đó sẽ sắp xếp cho các bạn một team để đi đánh chiến. Và <code>OBS</code> chính là công cụ để xác định xem cần một team dư nào để làm một dự án đã được breakdown work. <code>Cấu trúc phân chia cơ cấu tổ chức (OBS)</code>xác định các mối quan hệ tổ chức và được sử dụng như một khuôn khổ để phân công trách nhiệm công việc. Giao điểm của <code>OBS</code> và <code>WBS</code> sẽ xác định các điểm trách nhiệm quản lý đối với công việc - và được gọi là <code>Control (or Cost) Accounts - Tài khoản quản lý (hay Tài khoản chi phí)</code>.</p>
+<h2 id="3-cbs-cost-breakdown-structure---câu-trúc-phân-chia-chi-phí"><a class="header" href="#3-cbs-cost-breakdown-structure---câu-trúc-phân-chia-chi-phí">3. CBS (Cost Breakdown Structure) - Câu trúc phân chia chi phí</a></h2>
+<p><code>Cấu trúc phân tích chi phí (CBS)</code>: phân loại các chi phí trong dự án thành các đơn vị/ trung tâm chi phí và các yếu tố/ các loại chi phí. Việc thiết lập một cơ cấu chi phí sẽ giúp việc lên kế hoạch, kiểm soát chi phí hiệu quả và đưa ra những biện pháp để giảm thiểu chi phí. Phải nói đây là phần gây cho mình nhiều tò mò nhất. Tất nhiên ai chả muốn biết đóng góp của bản thân vào mỗi dự án phần mềm đang được định giá bao nhiêu đúng không.</p>
+<h2 id="4-rbs-resource-breakdown-structure---cấu-trúc-phân-chia-nguồn-lực"><a class="header" href="#4-rbs-resource-breakdown-structure---cấu-trúc-phân-chia-nguồn-lực">4. RBS (Resource Breakdown Structure) - Cấu trúc phân chia nguồn lực</a></h2>
+<p><code>Cấu trúc phân chia nguồn lực (RBS)</code>: là một danh sách tiêu chuẩn có các nguồn lực nhân sự liên quan theo chức năng và được sắp xếp theo một cấu trúc phân cấp để tạo thuận lợi cho việc lập kế hoạch và kiểm soát công việc của dự án. Thường thì các role trong dự án cần được phân chia một cách rõ ràng. Mọi sự nhập nhằng sẽ dẫn tới một kết cục không vui đâu. Tin mình đi. Mình có kinh nghiệm òi (yaoming)</p>
+<h2 id="5-pbs-product-breakdown-structure---cấu-trúc-phân-chia-sản-phẩm"><a class="header" href="#5-pbs-product-breakdown-structure---cấu-trúc-phân-chia-sản-phẩm">5. PBS (Product Breakdown Structure) - Cấu trúc phân chia sản phẩm</a></h2>
+<p><code>Một cấu trúc phân chia sản phẩm (PBS)</code>: là một cấu trúc cây phân cấp toàn diện các thành phần tạo nên một sản phẩm và được bố trí trong một mối quan hệ bộ phận - toàn phần. Các phương pháp quản lý dự án <code>PRINCE2</code> quy định sử dụng sản phẩm trên kế hoạch, một phần trong số đó là việc phát triển một cấu trúc phân chia sản phẩm. Trong thực tế, có rất ít sự khác biệt giữa một <code>PBS</code> và một <code>WBS</code>, cả hai hệ thống đều xác định đầy đủ các công việc cần thiết để hoàn thành một dự án.</p>
+<h2 id="6-bom-bill-of-materials--Định-mức-nguyên-vật-liệu"><a class="header" href="#6-bom-bill-of-materials--Định-mức-nguyên-vật-liệu">6. BoM (Bill of Materials)- Định mức nguyên vật liệu</a></h2>
+<p><code>BoM</code>: phân tích từng yếu tố hữu hình của sản phẩm dự án thành các bộ phận cấu thành của nó, và thường được sử dụng cho việc mua sắm các thành phần. Trong dự án phần mềm đó sẽ là các devices phát triển, thiết bị test, server, tài khoản này kia...vv</p>
+<h2 id="7-rbs-risk-breakdown-structure---cấu-trúc-phân-chia-rủi-ro"><a class="header" href="#7-rbs-risk-breakdown-structure---cấu-trúc-phân-chia-rủi-ro">7. RBS (Risk Breakdown Structure) - Cấu trúc phân chia rủi ro</a></h2>
+<p><code>Cấu trúc phân chia rủi ro (RBS)</code>: là một mô tả tất cả câc rủi ro của dự án (được phân theo các nhóm rủi ro). Những rủi ro được đặt vào trong cấu trúc cây khi chúng được xác định, và cấu trúc cây được sắp xếp theo nguồn cơ. Do đó, chúng ta có thể dễ hiểu được tổng thể rủi ro của dự án và việc lập kế hoạch cho các rủi ro một cách dễ dàng hơn.</p>
+<h2 id="8-cbs-contract-breakdown-structure---cấu-trúc-phân-chia-hợp-đồng"><a class="header" href="#8-cbs-contract-breakdown-structure---cấu-trúc-phân-chia-hợp-đồng">8. CBS (Contract Breakdown Structure) - Cấu trúc phân chia hợp đồng</a></h2>
+<p><code>CBS</code> là một sự sắp xếp theo thứ bậc của các nhà thầu chính, nhà thầu phụ, nhà cung cấp v.v., để biểu thị các chuỗi cung ứng hàng hoá và dịch vụ tổng thể cho dự án. Mức độ hiệu quả của chuỗi cung ứng tổng thể là rất quan trọng cho sự thành công của một dự án.</p>
+<h2 id="iii-tổng-kết"><a class="header" href="#iii-tổng-kết">III. Tổng kết</a></h2>
+<p>Hôm nay mình chỉ có thể giới thiệu qua cho các bạn các cấu trúc phân chia thôi. Còn cụ thể trong thực tế chúng được vận dụng như thế nào thì hẹn các bạn một ngày đẹp trời khi mình có cơ hội làm PM nhé (yaoming) Mong rằng bài viết sẽ tạo duyên cớ để các bạn đi sâu hơn tìm hiểu về các cấu trúc phân chia và cách quản lý dự án. ^^</p>
+
+                    </main>
+
+                    <nav class="nav-wrapper" aria-label="Page navigation">
+                        <!-- Mobile navigation buttons -->
+
+
+                        <div style="clear: both"></div>
+                    </nav>
+                </div>
+            </div>
+
+            <nav class="nav-wide-wrapper" aria-label="Page navigation">
+
+            </nav>
+
+        </div>
+
+
+
+
+        <script>
+            window.playground_copyable = true;
+        </script>
+
+
+        <script src="elasticlunr.min.js"></script>
+        <script src="mark.min.js"></script>
+        <script src="searcher.js"></script>
+
+        <script src="clipboard.min.js"></script>
+        <script src="highlight.js"></script>
+        <script src="book.js"></script>
+
+        <!-- Custom JS scripts -->
+
+        <script>
+        window.addEventListener('load', function() {
+            window.setTimeout(window.print, 100);
+        });
+        </script>
+
+    </div>
+    </body>
+</html>

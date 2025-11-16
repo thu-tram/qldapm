@@ -6,7 +6,7 @@
 
 ## **TABLE OF CONTENTS & WRITING GUIDE**
 
----
+
 
 ### **PART I – FOUNDATION: Understanding What You’re Managing**
 
@@ -25,7 +25,7 @@
 **Reflection to Write:**
 Viết lại chương này như một lời mở đầu cho chính hành trình học của bạn: “Nếu tôi là project manager cho dự án này, tôi sẽ nhìn nó như thế nào?”.
 
----
+
 
 #### **Chapter 2. How Software Projects Are Managed**
 
@@ -42,7 +42,7 @@ Viết lại chương này như một lời mở đầu cho chính hành trình 
 **Reflection to Write:**
 Biến chương này thành một “bức chân dung PM lý tưởng” – không chỉ mô tả, mà phản chiếu xem bạn đang ở đâu trên con đường đó.
 
----
+
 
 ### **PART II – PLANNING: Designing the Journey**
 
@@ -61,7 +61,7 @@ Biến chương này thành một “bức chân dung PM lý tưởng” – kh�
 **Reflection to Write:**
 Viết chương này như một bài luận ngắn giải thích vì sao *“Không có mô hình nào là hoàn hảo, chỉ có mô hình phù hợp.”*
 
----
+
 
 #### **Chapter 4. Planning the Project**
 
@@ -78,7 +78,7 @@ Viết chương này như một bài luận ngắn giải thích vì sao *“Kh�
 **Reflection to Write:**
 Tưởng tượng bạn đang viết nhật ký kế hoạch dự án — mô tả cách bạn phân rã công việc, và điều bạn học được khi ước lượng thời gian.
 
----
+
 
 #### **Chapter 5. Estimating Cost and Managing Risk**
 
@@ -96,7 +96,7 @@ Tưởng tượng bạn đang viết nhật ký kế hoạch dự án — mô t�
 **Reflection to Write:**
 Chia sẻ cảm nhận: “Vì sao dự đoán trong quản lý dự án luôn sai, và điều đó không sao cả?”
 
----
+
 
 ### **PART III – EXECUTION: Turning Plans into Progress**
 
@@ -116,7 +116,7 @@ Chia sẻ cảm nhận: “Vì sao dự đoán trong quản lý dự án luôn s
 **Reflection to Write:**
 Kể lại một trải nghiệm thật khi nhóm bạn rơi vào giai đoạn “storming” – bạn đã học được gì về quản lý con người?
 
----
+
 
 #### **Chapter 7. Ensuring Quality**
 
@@ -134,7 +134,7 @@ Kể lại một trải nghiệm thật khi nhóm bạn rơi vào giai đoạn �
 **Reflection to Write:**
 Viết chương này như một lời nhắc: “Chất lượng không phải là giai đoạn cuối, mà là thói quen từ đầu.”
 
----
+
 
 ### **PART IV – GROWTH: Learning from Projects**
 
@@ -153,7 +153,7 @@ Viết chương này như một lời nhắc: “Chất lượng không phải l
 **Reflection to Write:**
 Đây là chương tổng kết của bạn: “Điều gì tôi học được từ quá trình học và viết cuốn sổ tay này?”
 
----
+
 
 ### **Epilogue – Managing Projects, Managing Yourself**
 
